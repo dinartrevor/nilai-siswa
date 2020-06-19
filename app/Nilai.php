@@ -18,4 +18,8 @@ class Nilai extends Model
      public function mapel(){
       return $this->belongsTo(Mapel::class);
     }
+    public function remedial()
+    {
+        return $this->hasMany(Remedial::class);
+    }
 }

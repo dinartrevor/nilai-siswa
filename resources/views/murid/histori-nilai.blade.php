@@ -22,8 +22,14 @@
     </div>
   </div>
    <div class="col-md-12">
-          <div class="card">
-        <!-- Card header -->
+    @if($message=Session::get('sukses'))
+      <div class="alert alert-success alert-block">
+        <button type="button"class="close" data-dismiss="alert">X</button>
+        <strong>{{$message}}</strong>
+      </div>
+    @endif
+      <div class="card">
+          <!-- Card header -->
         <div class="card-header border-0">
           <h3 class="mb-0">Nilai Siswa</h3>
         </div>
@@ -53,9 +59,9 @@
                   <td >{{$m->mapel->nama_mapel}}</td>
                   <td >{{$m->nilai_mapel}}</td>
                   @if ($m->status == 'Remed')
-                    <td><span class="btn btn-sm btn-danger">Remed</span></td>
+                    <td><a href="{{route('remedial', $m->id)}}" class="badge  badge-danger">Remed</a></td>
                   @elseif ($m->status == 'Lulus')
-                    <td ><span class="btn btn-sm btn-success">Lulus</span></td>
+                    <td ><span class="badge badge-success">Lulus</span></td>
                   @endif
                   <td >{{$m->semester}}</td>
                 </tr>

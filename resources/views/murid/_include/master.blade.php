@@ -65,11 +65,15 @@
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
   <script src="{{ asset('DataTables/datatables.js') }}"></script>
+  <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+  <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+
   <script type="text/javascript">
   $(document).ready(function() {
     $('#dataTables').DataTable([{
       responsive : true
     }]);
+    var lfm = $('#lfm').filemanager('image');
   });
   </script>
 </body>

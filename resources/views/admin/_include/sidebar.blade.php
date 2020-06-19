@@ -42,6 +42,12 @@
               <span class="nav-link-text">Mapel</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/admin/remedial" class="nav-link {{Request::is('admin/remedial')?'active':''}}">
+              <i class="fa fa-book text-info"></i>
+              <span class="nav-link-text">Remedial</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

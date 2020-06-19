@@ -22,6 +22,11 @@ class Siswa extends Model
   {
       return $this->hasMany(Nilai::class);
   }
+  public function remedial()
+  {
+      return $this->hasMany(Remedial::class);
+  }
+
 
 
 }
