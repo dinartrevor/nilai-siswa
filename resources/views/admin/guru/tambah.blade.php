@@ -40,13 +40,13 @@
                  <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Kode</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Masukan Kode..." name="kode" required>
+                    <input type="text" id="input-username" class="form-control" readonly value="{{ mt_rand(1000000, 9999999)}}" name="kode" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Nip</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Masukan Nip..." name="nip" required>
+                    <input type="text" id="input-username" class="form-control" readonly value="{{ mt_rand(1000000, 9999999)}}" name="nip" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -110,8 +110,6 @@
                       @foreach($mapel as $m)
                         <option value="{{$m->id}}">{{$m->nama_mapel}}</option>
                       @endforeach
-                      <option value="" disabled="disabled">─────────────────────────</option>
-                      <option value="0">Bukan Guru Pengajar</option>
                     </select>
                   </div>
                 </div>

@@ -32,28 +32,29 @@
           </div>
         </div>
         <div class="card-body">
-          <form method="post" action="{{route('bukti_remedial', $nilai)}}">
+          <form method="post" action="{{route('bukti_remedial', $nilai)}}"  autocomplete="off" enctype="multipart/form-data" >
             {{ csrf_field() }}
             <div class="pl-lg-4">
               @include('pemberitahuan.validasi') 
               <div class="row">
+                <div class="col-md-6 mb-5">
+                    <span>Mapel : {{$nilai->mapel->nama_mapel}}</span>
+                </div>
+                <div class="col-md-6">
+                <span>Nama Guru Mapel : {{$nilai->guru->nama}}</span>
+                </div>
                  <div class="col-lg-12">
                   <div class="form-group">
                     <label for="lfm">Bukti Remedial</label>
                     <div class="input-group">
-                      <span class="input-group-prepend">
-                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary input-group-btn">
-                          <i class="fa fa-picture-o"></i> Choose
-                        </a>
-                      </span>
-                      <input id="thumbnail" class="form-control" type="text" name="thumbnail" {{$errors->has('thumbnail') ? 'has-error' : ''}} autocomplete="off">
+                      <input id="image-upload" class="form-control" type="file" name="thumbnail" {{$errors->has('thumbnail') ? 'has-error' : ''}} autocomplete="off">
                     </div>
-                    <img id="holder" style="margin-top:15px;max-height:100px;">
                     @if ($errors->has('thumbnail'))
                       <span class="help-block">{{$errors->first('thumbnail')}}</span>
                     @endif
                   </div>
                 </div>
+             
                  <div class="col-lg-12">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Pesan</label>

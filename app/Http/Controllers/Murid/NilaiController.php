@@ -17,8 +17,10 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::where('user_id', Auth::id())->first();
-        $nilai = Nilai::where('siswa_id', $siswa->id )->get();
+        $siswa = Siswa::where('user_id', Auth::user() ? Auth::id() : "")->first();
+        $nilai = Nilai::where('siswa_id', $siswa ? $siswa->id : "" )->get();
+      
+ 
         return view('murid.histori-nilai', compact('nilai'));
     }
 

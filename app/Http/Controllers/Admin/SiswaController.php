@@ -57,7 +57,6 @@ class SiswaController extends Controller
             'nis' => $request->nis,
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => bcrypt($request->nis),
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,

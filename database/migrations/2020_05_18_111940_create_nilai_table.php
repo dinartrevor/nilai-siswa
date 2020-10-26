@@ -15,8 +15,9 @@ class CreateNilaiTable extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('siswa_id');
-            $table->bigInteger('mapel_id');
+            $table->bigInteger('siswa_id')->nullable();
+            $table->bigInteger('mapel_id')->nullable();
+            $table->bigInteger('guru_id')->nullable();
             $table->float('kkm');
             $table->float('nilai_mapel');
             $table->string('status');

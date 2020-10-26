@@ -44,6 +44,7 @@
                 <th >Nilai</th>
                 <th >Status</th>
                 <th >Semester</th>
+                <th >Guru Mapel</th>
               </tr>
             </thead>
             <tbody>
@@ -59,11 +60,22 @@
                   <td >{{$m->mapel->nama_mapel}}</td>
                   <td >{{$m->nilai_mapel}}</td>
                   @if ($m->status == 'Remed')
-                    <td><a href="{{route('remedial', $m->id)}}" class="badge  badge-danger">Remed</a></td>
+                    <td><span  class="badge  badge-danger">Remed</span></td>
                   @elseif ($m->status == 'Lulus')
                     <td ><span class="badge badge-success">Lulus</span></td>
                   @endif
                   <td >{{$m->semester}}</td>
+                  <td >{{$m->guru->nama}}</td>
+                    @if ($m->status == 'Remed')
+                    {{-- {{dd($m->remedial)}} --}}
+                    @if (@$m->remedial->status == 'proses')
+                     <td><button type="button" class="btn  btn-info" disabled>Proses</button></td>
+                    @else
+                    <td><a href="{{route('remedial', $m->id)}}" class="btn  btn-warning">Bereskan Remedial</a></td>
+                    @endif
+                    @elseif ($m->status == 'Lulus')
+                    <td ><span class="btn btn-success">Tidak ada Remedial</span></td>
+                  @endif
                 </tr>
               @endforeach
             </tbody>

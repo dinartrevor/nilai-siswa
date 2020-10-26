@@ -22,7 +22,7 @@
           <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="/assets/img/brand/favicon.png">
+              <img width="100%" alt="Image placeholder" src="{{auth()->user()->siswa && auth()->user()->siswa->images ? '/storage/media/profile/'. auth()->user()->siswa->images: '/assets/img/brand/favicon.png'}}">
               </span>
               <div class="media-body  ml-2  d-none d-lg-block">
                 <span class="mb-0 text-sm  font-weight-bold"> {{ Auth::user() ? Auth::user()->name : '' }}</span>

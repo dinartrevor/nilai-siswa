@@ -14,6 +14,7 @@
   <!-- Icons -->
   <link rel="stylesheet" href="/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
@@ -65,11 +66,24 @@
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
   <script src="{{ asset('DataTables/datatables.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
     $('#dataTables').DataTable([{
       responsive : true
     }]);
+    $('.select2').select2();
+    $('#mapel').on('change',function(e){
+	
+			var mapel_id = e.target.value;
+			$.get('/guru/mapel?mapel_id=' + mapel_id, function(data){
+				$('#guru').empty();
+        
+				$.each(data, function(index, subcatObj){
+					$('#guru').append('<option value="'+subcatObj.id+'">'+subcatObj.nama+'</option>');
+				});
+			});
+		});
   });
   </script>
 </body>

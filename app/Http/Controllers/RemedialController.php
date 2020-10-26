@@ -15,7 +15,10 @@ class RemedialController extends Controller
      */
     public function index()
     {
-        return view('admin.remedial.index');
+        $remedial = Nilai::where('status', '=', 'Remed')->orderBy('created_at','Desc')->paginate(4);
+                     
+// dd($remedial);
+        return view('admin.remedial.index', compact('remedial'));
     }
 
     /**
@@ -85,20 +88,32 @@ class RemedialController extends Controller
     }
 
     public function remedial_murid(Nilai $nilai){
+        
         return view('murid.remedial', compact('nilai'));
     }
 
      public function bukti_remedial(Request $request,  Nilai $nilai)
     {
-        $siswa= auth()->user()->id;
-        $remedial = Remedial::create([
-            'siswa_id' => $siswa,
-            'nilai_id' => $nilai->id,
-            'thumbnail' => $request->thumbnail,
-            'pesan' => $request->pesan,
-        ]); 
-        return redirect('/murid/histori-nilai')->with('sukses','Bukti Remedial sudah terkirim');
-        
-        
+     
+            $siswa= auth()->user()->id;
+            if(isset($request->thumbnail) && $request->thumbnail){
+                $uniquename='cvr_images_'.md5($nilai->id);
+                $filename=$uniquename.'.'.$request->file('thumbnail')->getClientOriginalExtension();
+                $path=public_path('storage/media/remedial');
+                $request->thumbnail->move($path, $filename);
+                $request->thumbnail = $filename;
+            }
+            $remedial = Remedial::create([
+                'siswa_id' => $siswa,
+                'nilai_id' => $nilai->id,
+                'thumbnail' => $filename,
+                'pesan' => $request->pesan,
+                'status' => 'Proses'
+            ]); 
+            return redirect('/murid/histori-nilai')->with('sukses','Bukti Remedial sudah terkirim');
+    }
+    public function detail($id){
+        $nilai = Nilai::find($id);
+        dd($nilai);
     }
 }

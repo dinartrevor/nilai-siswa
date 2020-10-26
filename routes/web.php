@@ -52,13 +52,17 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/nilai/detail/{murid}','Admin\NilaiController@show')->name('nilai_siswa');
   Route::post('/admin/nilai/tambah-nilai/{murid}','Admin\NilaiController@store')->name('nilai');
   Route::get('/admin/nilai/delete-nilai/{nilai}/{murid}','Admin\NilaiController@destroy')->name('nilai_delete');
+  Route::get('/guru/mapel', 'Admin\NilaiController@guruMapel');
   Route::get('/admin/remedial','RemedialController@index');
+  Route::get('/admin/remedial/detail/{id}','RemedialController@detail')->name('detail.remedial');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
   Route::get('/murid', 'Murid\DashboardController@index');
   Route::get('/murid/histori-nilai', 'Murid\NilaiController@index');
   Route::get('/murid/cetak-nilai','Murid\NilaiController@export_pdf')->name('cetakNilai');
+  Route::get('/murid/edit-profil','Murid\SiswaController@editProfil')->name('editProfil');
+  Route::post('/murid/edit-profil/{id}','Murid\SiswaController@editProfilSiswa')->name('editProfileSiswa');
   Route::get('/murid/remedial/{nilai}','RemedialController@remedial_murid')->name('remedial');
   Route::post('/murid/remedial/bukti/{nilai}','RemedialController@bukti_remedial')->name('bukti_remedial');
 });
