@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/murid/detail/{murid}','Admin\SiswaController@show')->name('detailMurid');
   Route::get('/admin/murid/edit-murid/{murid}', 'Admin\SiswaController@edit')->name('editMurid');
   Route::post('/admin/murid/edit-murid/{murid}/update', 'Admin\SiswaController@update')->name('updateMurid');
+  Route::get('/admin/murid/cetak','Admin\SiswaController@cetak')->name('cetak_murid');
 
   Route::get('/admin/guru','Admin\GuruController@index');
   Route::get('/admin/guru/tambah','Admin\GuruController@create')->name('tambah_guru');
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/guru/detail/{guru}','Admin\GuruController@show')->name('detail_guru');
   Route::get('/admin/guru/edit/{guru}','Admin\GuruController@edit')->name('edit_guru');
   Route::post('/admin/guru/edit/{guru}/update','Admin\GuruController@update')->name('updateGuru');
+  Route::get('/admin/guru/cetak','Admin\GuruController@cetak')->name('cetak_guru');
 
   Route::get('/admin/kelas','Admin\KelasController@index');
   Route::get('/admin/kelas/tambah','Admin\KelasController@create')->name('tambah_kelas');
@@ -55,6 +57,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/guru/mapel', 'Admin\NilaiController@guruMapel');
   Route::get('/admin/remedial','RemedialController@index');
   Route::get('/admin/remedial/detail/{id}','RemedialController@detail')->name('detail.remedial');
+  Route::post('/admin/remedial/detail/{id}','RemedialController@detailUpdate')->name('remedial.update');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {

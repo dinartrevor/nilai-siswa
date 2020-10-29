@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Nilai;
 use App\Remedial;
 use App\Siswa;
+use DB;
 class RemedialController extends Controller
 {
     /**
@@ -114,6 +115,48 @@ class RemedialController extends Controller
     }
     public function detail($id){
         $nilai = Nilai::find($id);
-        dd($nilai);
+        if($nilai){
+            $remedial = $nilai->remedial;
+            $siswa = $nilai->siswa;
+            // dd($siswa->kelas);  
+        }
+    //    dd($nilai);
+  
+        return view('admin.remedial.show', compact('nilai', 'remedial','siswa'));
+    
+    }
+    public function detailUpdate(Request $request, $id){
+        $data = $request->all();
+        DB::beginTransaction();
+        try {
+            $nilai_mapel= $request->nilai_mapel;
+            $kkm = 70;
+            $status ="";
+            if($nilai_mapel < $kkm){
+                $status="Remed";
+            }elseif ($nilai_mapel >= $kkm) {
+                $status="Lulus";
+            }else{
+                $status="kosong";
+            }
+        $nilai = Nilai::where('id',$id)->first();
+        $remedial = Remedial::where('nilai_id', $nilai->id)->first();
+        $data['kkm'] = $kkm;
+        $data['status'] = $status;
+        $nilai->update($data);
+        if(isset($request->status_remed) && $request->status_remed){
+            $remedial->status = $data['status_remed'];
+            $remedial->save();
+        }
+        DB::commit();
+        return redirect()->back();
+     
+    } catch (\Exception $ex) {
+        DB::rollback();
+        throw $ex;
+    }
+       
+       
+            
     }
 }
