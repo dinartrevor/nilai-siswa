@@ -16,10 +16,15 @@ class RemedialController extends Controller
      */
     public function index()
     {
-        $remedial = Nilai::where('status', '=', 'Remed')->orderBy('created_at','Desc')->paginate(4);
-                     
+        $siswa_remed = Remedial::where('status', '!=', 'selesai')->first();
+        if($siswa_remed){
+            $remedial = Nilai::where('status', '=', 'Remed')->orderBy('created_at','Desc')->paginate(4);
+            return view('admin.remedial.index', compact('remedial'));
+        }
+        // $remedial = Nilai::where('status', '=', 'Remed')->orderBy('created_at','Desc')->paginate(4);
+        return redirect()->back()->with('message', 'Belum Ada yang menyerahkan Remedial');   ;          
 // dd($remedial);
-        return view('admin.remedial.index', compact('remedial'));
+        
     }
 
     /**
@@ -114,16 +119,19 @@ class RemedialController extends Controller
             return redirect('/murid/histori-nilai')->with('sukses','Bukti Remedial sudah terkirim');
     }
     public function detail($id){
-        $nilai = Nilai::find($id);
-        if($nilai){
-            $remedial = $nilai->remedial;
-            $siswa = $nilai->siswa;
-            // dd($siswa->kelas);  
-        }
-    //    dd($nilai);
-  
-        return view('admin.remedial.show', compact('nilai', 'remedial','siswa'));
+        $siswa_remed = Remedial::where('status', '!=', 'selesai')->first();
+        if($siswa_remed){
+            $nilai = Nilai::find($id);
+            if($nilai){
+                $remedial = $nilai->remedial;
+                $siswa = $nilai->siswa;
+                // dd($siswa->kelas);  
+            }
+        //    dd($nilai);
     
+            return view('admin.remedial.show', compact('nilai', 'remedial','siswa'));
+        }
+        return redirect('/')->with('message', 'Belum Ada yang menyerahkan Remedial');   
     }
     public function detailUpdate(Request $request, $id){
         $data = $request->all();
