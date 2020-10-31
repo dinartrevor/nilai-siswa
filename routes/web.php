@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/kelas/edit-kelas/{kelas}', 'Admin\KelasController@edit');
   Route::post('/admin/kelas/edit-kelas/{kelas}/update', 'Admin\KelasController@update')->name('updateKelas');
   Route::get('/admin/kelas/delete-kelas/{kelas}', 'Admin\KelasController@destroy')->name('hapus-kelas');
+  Route::get('/admin/kelas/cetak','Admin\KelasController@cetak')->name('report_kelas');
 
   Route::get('/admin/mapel','Admin\MapelController@index');
   Route::get('/admin/mapel/tambah','Admin\MapelController@create')->name('tambah_mapel');
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/mapel/edit-mapel/{mapel}', 'Admin\MapelController@edit');
   Route::post('/admin/mapel/edit-mapel/{mapel}/update', 'Admin\MapelController@update')->name('updateMapel');
   Route::get('/admin/mapel/delete-mapel/{mapel}', 'Admin\MapelController@destroy');
+  Route::get('/admin/mapel/cetak','Admin\MapelController@cetak')->name('report_mapel');
 
   Route::get('/admin/nilai/detail/{murid}','Admin\NilaiController@show')->name('nilai_siswa');
   Route::post('/admin/nilai/tambah-nilai/{murid}','Admin\NilaiController@store')->name('nilai');
