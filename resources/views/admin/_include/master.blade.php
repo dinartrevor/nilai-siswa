@@ -41,7 +41,7 @@
           <div class="col-lg-6">
             <ul class="nav nav-footer  justify-content-center justify-content-lg-end">
               <li class="nav-item">
-                <a href="mailto:smk14bdg@yahoo.com" class="nav-link" target="_blank" style="color: white !important">smk14bdg@yahoo.com</a>
+                <a href="mailto:smk14bdg@yahoo.com" class="nav-link" target="_blank" style="color: white !important">smkn14bdg@yahoo.com</a>
               </li>
               <li class="nav-item">
                 <a href="tel:0227560358" class="nav-link " target="_blank"style="color: white !important">(022) 7560358</a>

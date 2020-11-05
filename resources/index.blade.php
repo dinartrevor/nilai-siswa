@@ -134,7 +134,7 @@
                 <i class="ni location_pin mr-2"></i>Indonesia, Jawa Barat, Kota Bandung
               </div>
               <div class="h5 mt-4">
-                <i class="ni business_briefcase-24 mr-2"></i>smk14bdg@yahoo.com
+                <i class="ni business_briefcase-24 mr-2"></i>smkn14bdg@yahoo.com
               </div>
               <div>
                 <i class="ni education_hat mr-2"></i>

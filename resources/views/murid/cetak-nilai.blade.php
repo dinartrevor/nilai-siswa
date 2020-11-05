@@ -7,7 +7,7 @@
   <div style="text-align: Center">
     <img src="{{ public_path('assets/img/icons/logo-dark.png')}}" style="width: 90px; float: left; ;">
     <h2>
-      SMK 14 BANDUNG
+      SMKN 14 BANDUNG
       <br><span style="font-size: 15px;">Jl. Cijawura Hilir No. 341 | Bandung</span>
       <br><span style="font-size: 15px;">Telp: (022) 7560358 | Website: www.smkn14bdg.sch.id | Yahoo: smk14bdg@yahoo.com
       </span>

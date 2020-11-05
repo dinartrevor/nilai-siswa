@@ -4,7 +4,7 @@
     <div class="sidenav-header  align-items-center">
       <a class="navbar-brand" href="javascript:void(0)">
         <img src="/assets/img/icons/logo-dark.png" class="navbar-brand-img">
-        <span>SMK 14</span>
+      <span style="float: left;">SMKN 14 BANDUNG</span>
       </a>
     </div>
     <div class="navbar-inner">

@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::post('/admin/nilai/tambah-nilai/{murid}','Admin\NilaiController@store')->name('nilai');
   Route::get('/admin/nilai/delete-nilai/{nilai}/{murid}','Admin\NilaiController@destroy')->name('nilai_delete');
   Route::get('/admin/remedial','RemedialController@index');
+   Route::get('/admin/remedial/detail','RemedialController@detail');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {

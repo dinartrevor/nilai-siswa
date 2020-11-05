@@ -37,7 +37,7 @@
         <div class="card-body">
           <h5 class="card-title">Mapel</h5>
           <p class="card-text">Pesan</p>
-          <a href="#" class="btn btn-primary">Selengkapnya</a>
+          <a href="{{url('admin/remedial/detail')}}" class="btn btn-primary">Selengkapnya</a>
         </div>
       </div>
       <div class="card">
@@ -53,7 +53,7 @@
           <div class="card-body">
             <h5 class="card-title">Mapel</h5>
             <p class="card-text">Pesan</p>
-            <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <a href="{{url('admin/remedial/detail')}}" class="btn btn-primary">Selengkapnya</a>
           </div>
       </div>
       <div class="card">
@@ -61,7 +61,7 @@
         <div class="card-body">
           <h5 class="card-title">Mapel</h5>
           <p class="card-text">Pesan</p>
-          <a href="#" class="btn btn-primary">Selengkapnya</a>
+          <a href="{{url('admin/remedial/detail')}}" class="btn btn-primary">Selengkapnya</a>
         </div>
       </div>
       <nav aria-label="Page navigation example">
