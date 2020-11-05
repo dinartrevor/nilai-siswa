@@ -16,7 +16,7 @@
           </div>
           <div class="col-lg-6 col-5 text-right">
             <a href="{{route('tambah_mapel')}}" class="btn  btn-neutral">Tambah</a>
-          </div>
+            <a href="{{route('report_mapel')}}" class="btn  btn-neutral" target="_blank">Cetak</a>
         </div>
       </div>
     </div>

@@ -17,8 +17,9 @@ class CreateRemedialTable extends Migration
             $table->increments('id');
             $table->bigInteger('siswa_id');
             $table->bigInteger('nilai_id');
-            $table->text('thumbnail');
+            $table->text('thumbnail')->nullable();
             $table->text('pesan');
+          $table->enum('status', ['proses', 'selesai'])->nullable();
             $table->timestamps();
         });
     }

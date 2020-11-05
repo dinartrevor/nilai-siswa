@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Kelas;
+use PDF;
 class KelasController extends Controller
 {
     /**
@@ -95,5 +96,13 @@ class KelasController extends Controller
         $kelas->delete();
 
         return redirect('admin/kelas')->with('destroy','Data Kelas berhasil dihapus');
+    }
+    public function cetak(){
+        $kelas = Kelas::get();
+        // dd($guru);
+            $pdf = PDF::loadView('admin.kelas.cetak',compact('kelas'));
+            $pdf->setPaper('a4','landscape');
+    
+            return $pdf->stream();
     }
 }

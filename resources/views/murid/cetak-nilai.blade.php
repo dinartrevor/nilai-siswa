@@ -43,21 +43,20 @@
   <table border="1" style="text-align: center;" >
     <thead>
       <tr>
-        <th width="20px">No</th>
+      
         <th width="120px">Mata Pelajaran</th>
         <th width="120px">KKM</th>
         <th width="120px">Nilai</th>
         <th width="120px">Status</th>
         <th width="120px">Semester</th>
+        <th >Guru Mapel</th>
       </tr>
     </thead>
     <tbody>
-      @php
-        $no = 1;
-      @endphp
+    
       @foreach($nilai as $m)
         <tr>
-          <td>{{$no++}}</td>
+         
           <td >{{$m->mapel->nama_mapel}}</td>
           <td >{{$m->kkm}}</td>
           <td >{{$m->nilai_mapel}}</td>
@@ -67,6 +66,7 @@
             <td ><span style="color: green;">Lulus</span></td>
           @endif
           <td >{{$m->semester}}</td>
+          <td >{{$m->guru->nama}}</td>
         </tr>
       @endforeach
     </tbody>

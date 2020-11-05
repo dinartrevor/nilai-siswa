@@ -18,12 +18,12 @@ class CreateSiswaTable extends Migration
             $table->string('nis')->unique();
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->text('images')->nullable();
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin');
             $table->string('agama');
-            $table->text('alamat');
+            $table->text('alamat')->nullable();
             $table->string('asal_sekolah');
             $table->bigInteger('kelas_id');
             $table->bigInteger('user_id')->nullable();

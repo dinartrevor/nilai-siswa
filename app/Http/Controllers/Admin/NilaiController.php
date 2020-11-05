@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Siswa;
 use App\Mapel;
 use App\Nilai;
+use App\Guru;
 class NilaiController extends Controller
 {
     /**
@@ -48,12 +49,13 @@ class NilaiController extends Controller
         }else{
             $status="kosong";
         }
-        if ($murid->nilai()->where('mapel_id', $request->mapel_id)->exists()) {
+        if ($murid->nilai()->where('mapel_id', $request->mapel_id)->where('semester',$request->semester)->exists()) {
          return redirect('admin/nilai/detail/'.$murid->id)->with('error', 'Data Mata Pelajaran Sudah ada');
         }else{
             $nilai = Nilai::create([
                 'siswa_id' => $murid->id,
                 'mapel_id' => $request->mapel_id,
+                'guru_id' => $request->guru_id,
                 'status' => $status,
                 'nilai_mapel' => $nilai_mapel,
                 'kkm' => $kkm,
@@ -76,8 +78,9 @@ class NilaiController extends Controller
     public function show(Siswa $murid)
     {
         $mapel = Mapel::all();
+        $guru = Guru::all();
         $nilai = Nilai::where('siswa_id', $murid->id)->get();
-        return view('admin.nilai.detail', compact('murid', 'nilai', 'mapel'));
+        return view('admin.nilai.detail', compact('murid', 'nilai', 'mapel','guru'));
     }
 
     /**
@@ -114,5 +117,10 @@ class NilaiController extends Controller
         $nilai->delete();
 
         return redirect('admin/nilai/detail/'.$murid->id)->with('delete', 'Data Nilai telah dihapus');
+    }
+    public function guruMapel(Request $request){
+        // dd();
+        $sub = Guru::where('mapel_id', '=', $request->mapel_id)->get();
+        return response()->json($sub);
     }
 }

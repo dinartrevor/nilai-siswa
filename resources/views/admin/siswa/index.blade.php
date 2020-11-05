@@ -16,6 +16,7 @@
           </div>
           <div class="col-lg-6 col-5 text-right">
             <a href="{{route('tambah_murid')}}" class="btn  btn-neutral">Tambah</a>
+            <a href="{{route('cetak_murid')}}" class="btn  btn-neutral" target="_blank">Cetak</a>
           </div>
         </div>
       </div>

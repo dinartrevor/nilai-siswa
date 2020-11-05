@@ -32,38 +32,21 @@
   @endif  --}}
   <div class="row">
     <div class="col-md-12">
+    @foreach ($remedial as $item)
       <div class="card">
-        <h5 class="card-header">Nama</h5>
+        <h5 class="card-header">{{$item->siswa ? $item->siswa->nama : "Tidak Ada yang Remed"}}</h5>
         <div class="card-body">
-          <h5 class="card-title">Mapel</h5>
-          <p class="card-text">Pesan</p>
-          <a href="{{url('admin/remedial/detail')}}" class="btn btn-primary">Selengkapnya</a>
+          <h5 class="card-title">Mata Pelajaran : {{$item->mapel ? $item->mapel->nama_mapel : "Tidak Ada Yang Remedial"}}</h5>
+            <h5 class="card-title">Guru Mata Pelajaran : {{$item->guru ? $item->guru->nama: "Tidak Ada Yang Remedial"}}</h5>
+             @if ($item->status == 'Remed')
+              <a href="{{route('detail.remedial',$item->id)}}" class="btn btn-primary">Selengkapnya</a>
+              @else
+              {{-- <span class="badge badge-success">Lulus</span> --}}
+              @endif
+          
         </div>
       </div>
-      <div class="card">
-        <h5 class="card-header">Nama</h5>
-        <div class="card-body">
-          <h5 class="card-title">Mapel</h5>
-          <p class="card-text">Pesan</p>
-          <a href="#" class="btn btn-primary">Selengkapnya</a>
-        </div>
-      </div>
-      <div class="card">
-          <h5 class="card-header">Nama</h5>
-          <div class="card-body">
-            <h5 class="card-title">Mapel</h5>
-            <p class="card-text">Pesan</p>
-            <a href="{{url('admin/remedial/detail')}}" class="btn btn-primary">Selengkapnya</a>
-          </div>
-      </div>
-      <div class="card">
-        <h5 class="card-header">Nama</h5>
-        <div class="card-body">
-          <h5 class="card-title">Mapel</h5>
-          <p class="card-text">Pesan</p>
-          <a href="{{url('admin/remedial/detail')}}" class="btn btn-primary">Selengkapnya</a>
-        </div>
-      </div>
+    @endforeach
       <nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">

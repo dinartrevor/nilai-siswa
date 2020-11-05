@@ -39,7 +39,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Kode Mapel</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Kode Mapel" name="kode">
+                    <input type="text" id="input-username" class="form-control" readonly value="{{ mt_rand(1000000, 9999999)}}" name="kode">
                   </div>
                 </div>
                 <div class="col-lg-6">

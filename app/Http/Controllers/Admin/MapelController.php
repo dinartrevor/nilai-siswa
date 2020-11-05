@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mapel;
+use PDF;
 class MapelController extends Controller
 {
     /**
@@ -95,5 +96,14 @@ class MapelController extends Controller
     {
          $mapel->delete();
         return redirect('/admin/mapel')->with('delete', 'Data Mapel berhasil dihapus');
+    }
+
+    public function cetak(){
+        $mapel = Mapel::get();
+        // dd($guru);
+            $pdf = PDF::loadView('admin.mapel.cetak',compact('mapel'));
+            $pdf->setPaper('a4','landscape');
+    
+            return $pdf->stream();
     }
 }

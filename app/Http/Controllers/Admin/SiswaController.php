@@ -9,6 +9,7 @@ use App\Kelas;
 use App\User;
 use App\Mail\MailNotify;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 class SiswaController extends Controller
 {
     /**
@@ -57,7 +58,6 @@ class SiswaController extends Controller
             'nis' => $request->nis,
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => bcrypt($request->nis),
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -136,5 +136,14 @@ class SiswaController extends Controller
         $murid->delete();
 
         return redirect('admin/murid')->with('delete', 'Data Murid Telah di hapus');
+    }
+
+    public function cetak(){
+        $siswa = Siswa::with('kelas')->get();
+        // dd($guru);
+            $pdf = PDF::loadView('admin.siswa.cetak',compact('siswa'));
+            $pdf->setPaper('a4','landscape');
+    
+            return $pdf->stream();
     }
 }

@@ -19,9 +19,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::where('user_id', Auth::id())->first();
-        $nilai = Nilai::where('status', 'Remed')->where('siswa_id', $siswa->id)->count();
-        $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa->id)->count();
+        $siswa = Siswa::where('user_id',  Auth::user() ? Auth::id() : "")->first();
+        $nilai = Nilai::where('status', 'Remed')->where('siswa_id', $siswa ? $siswa->id: "")->count();
+        $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa ? $siswa->id: "")->count();
         return view('murid.index', compact('nilai','lulus'));
     }
 

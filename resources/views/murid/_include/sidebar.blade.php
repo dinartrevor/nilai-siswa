@@ -24,6 +24,12 @@
               <span class="nav-link-text">Histori Nilai</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/murid/edit-profil" class="nav-link {{Request::is('murid/edit-profil')?'active':''}}">
+              <i class="fas fa-user text-success"></i>
+              <span class="nav-link-text">Edit Profil</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

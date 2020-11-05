@@ -102,68 +102,7 @@
           </table>
         </div>
       </div>
-<!--    <div class="card">
-        <div class="card-header">
-          <div class="row align-items-center">
-            <div class="col-8">
-              <h3 class="mb-0">Tambah Nilai</h3>
-            </div>
-            <div class="col-4 text-right">
-              <a href="/admin/murid" class="btn btn-sm btn-primary">Kembali</a>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <form method="post" action="{{route('nilai', $murid)}}">
-            @csrf
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nis</label>
-                    <input type="text" id="input-username" class="form-control" disabled="" value="{{$murid->nis}}" name="nis">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nama</label>
-                    <input type="text" id="input-username" class="form-control" disabled value="{{$murid->nama}}" name="nama">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Mapel</label>
-                    <select class="form-control" name="mapel_id">
-                      <option>Pilih Mapel</option>
-                      @foreach($mapel as $s)
-                        <option value="{{$s->id}}">{{$s->nama_mapel}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Semester</label>
-                    <select class="form-control" name="semester">
-                      <option>Pilih Semester</option>
-                      @foreach($mapel as $s)
-                        <option value="{{$s->id}}">{{$s->semester}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                 <div class="col-lg-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nilai</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Masukan Nilai" name="nilai_mapel">
-                  </div>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Tambah</button>
-            </div>
-          </form>
-        </div>
-      </div> -->
+
     </div>
   </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -180,7 +119,7 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label class="form-control-label" for="input-username">Mapel</label>
-            <select class="form-control" name="mapel_id">
+            <select class="form-control select2" name="mapel_id" id="mapel">
               <option>Pilih Mapel</option>
               @foreach($mapel as $s)
                 <option value="{{$s->id}}">{{$s->nama_mapel}}</option>
@@ -188,8 +127,15 @@
             </select>
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="input-username">Guru Mapel</label>
+            <select class="form-control select2" name="guru_id" id="guru">
+              <option>Pilih Guru Mapel</option>
+             
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="input-username">Semester</label>
-            <select class="form-control" name="semester">
+            <select class="form-control select2" name="semester">
               <option>Pilih Semester</option>
               <option value="Ganjil">Ganjil</option>
               <option value="Genap">Genap</option>

@@ -108,8 +108,6 @@
                       @foreach($mapel as $m)
                         <option value="{{$m->id}}"   {{ $m->nama_mapel == ['mapel_id'] ? 'selected' : ""}}>{{$m->nama_mapel}}</option>
                       @endforeach
-                      <option value="" disabled="disabled">─────────────────────────</option>
-                      <option value="0">Bukan Guru Pengajar</option>
                     </select>
                   </div>
                 </div>

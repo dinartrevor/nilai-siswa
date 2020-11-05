@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Guru;
 use App\Mapel;
+use PDF;
 class GuruController extends Controller
 {
     /**
@@ -108,4 +109,16 @@ class GuruController extends Controller
 
         return redirect('admin/guru')->with('delete', 'Data Guru telah di hapus');
     }
+
+    public function cetak(){
+      
+        $guru = Guru::with('mapel')->get();
+        // dd($guru);
+            $pdf = PDF::loadView('admin.guru.cetak',compact('guru'));
+            $pdf->setPaper('a4','landscape');
+    
+            return $pdf->stream();
+        
+    }
 }
+
