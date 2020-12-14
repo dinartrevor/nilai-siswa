@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   <link rel="stylesheet" href="{{ asset('DataTables/datatables.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
 
 </head>
 
@@ -62,6 +64,7 @@
   <!-- Optional JS -->
   <script src="/assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
   <script src="{{ asset('DataTables/datatables.js') }}"></script>
@@ -90,6 +93,122 @@
         reader.readAsDataURL(input.files[0]);
     }
   }
+  
+    $(function() {
+//        $('.rating').rating({
+//            displayOnly: true,
+//            step: 0.5
+//        });
+      var player_kills = @json(@$nama_mapel);
+
+      var nama_mapel = [player_kills];
+
+        var nilai_mapel = @json(@$nilai_mapel);
+
+        var p_names = [nilai_mapel];
+ 
+       var semesterGanjil = @json(@$nama_mapel2);
+
+      var nama_mapel_ganjil = [semesterGanjil];
+
+        var nilai_mapel_ganjil = @json(@$nilai_mapel2);
+
+        var ganjil = [nilai_mapel_ganjil];
+
+        var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+    var areaChartData = {
+      labels  : nama_mapel[0],
+      datasets: [
+        {
+          label               : 'Nilai',
+          backgroundColor     : '#3c8dbc',
+          borderColor         : '#3c8dbc',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : p_names[0]
+        },
+       
+      ]
+    }
+
+    var areaChartOptions = {
+      maintainAspectRatio : false,
+      responsive : true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines : {
+            display : true,
+          }
+        }],
+        yAxes: [{
+          gridLines : {
+            display : true,
+          }
+        }]
+      }
+    }
+
+    // This will get the first returned node in the jQuery collection.
+    var areaChart       = new Chart(areaChartCanvas, { 
+      type: 'bar',
+      data: areaChartData, 
+      options: areaChartOptions
+    });
+
+    var myChart = $('#myChart').get(0).getContext('2d')
+
+    var areaChartGanjil = {
+      labels  : nama_mapel_ganjil[0],
+      datasets: [
+        {
+          label               : 'Nilai',
+          backgroundColor     : '#5e72e4 ',
+          borderColor         : '#5e72e4 ',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : ganjil[0]
+        },
+       
+      ]
+    }
+
+    var areaChartOptionsGanjil = {
+      maintainAspectRatio : false,
+      responsive : true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines : {
+            display : true,
+          }
+        }],
+        yAxes: [{
+          gridLines : {
+            display : true,
+          }
+        }]
+      }
+    }
+
+    // This will get the first returned node in the jQuery collection.
+    var areaChart       = new Chart(myChart, { 
+      type: 'bar',
+      data: areaChartGanjil, 
+      options: areaChartOptionsGanjil
+    })
+  });
   </script>
 </body>
 

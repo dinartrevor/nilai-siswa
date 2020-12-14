@@ -21,8 +21,31 @@ class DashboardController extends Controller
     {
         $siswa = Siswa::where('user_id',  Auth::user() ? Auth::id() : "")->first();
         $nilai = Nilai::where('status', 'Remed')->where('siswa_id', $siswa ? $siswa->id: "")->count();
+        $genap = Nilai::where('semester', 'Genap')->first();
+         $ganjil = Nilai::where('semester', 'Ganjil')->first();
         $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa ? $siswa->id: "")->count();
-        return view('murid.index', compact('nilai','lulus'));
+        $semester1 = Nilai::leftjoin('siswa', 'nilai.siswa_id', '=', 'siswa.id')
+        ->leftjoin('users','siswa.user_id','=','users.id')
+        ->leftjoin('mapel', 'nilai.mapel_id', '=', 'mapel.id')
+         ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
+        ->where('nilai.semester', '=', $genap->semester)
+        ->distinct() 
+        ->get();
+        $semester2 = Nilai::leftjoin('siswa', 'nilai.siswa_id', '=', 'siswa.id')
+        ->leftjoin('users','siswa.user_id','=','users.id')
+        ->leftjoin('mapel', 'nilai.mapel_id', '=', 'mapel.id')
+         ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
+        ->where('nilai.semester', '=', $ganjil->semester)
+        ->distinct() 
+        ->get();
+      
+        $nama_mapel = $semester1->pluck('nama_mapel');
+        $nilai_mapel = $semester1->pluck('nilai_mapel');
+         $nama_mapel2 = $semester2->pluck('nama_mapel');
+        $nilai_mapel2 = $semester2->pluck('nilai_mapel');
+       
+       
+        return view('murid.index', compact('nilai','lulus','nama_mapel','nilai_mapel','nama_mapel2','nilai_mapel2'));
     }
 
     /**
