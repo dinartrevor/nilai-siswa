@@ -99,8 +99,8 @@ class MapelController extends Controller
     }
 
     public function cetak(){
-        $mapel = Mapel::get();
-        // dd($guru);
+        $mapel = Mapel::with('guru')->get();
+        // dd($mapel);
             $pdf = PDF::loadView('admin.mapel.cetak',compact('mapel'));
             $pdf->setPaper('a4','landscape');
     

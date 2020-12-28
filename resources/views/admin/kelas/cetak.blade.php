@@ -21,7 +21,7 @@
     <thead>
       <tr>
       
-        <th >Nomer</th>
+        <th >Kelas</th>
         <th >Jurusan</th>
       </tr>
     </thead>

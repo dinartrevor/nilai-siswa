@@ -21,15 +21,19 @@
     <thead>
       <tr>
       
-        <th >Nomer</th>
-        <th >Jurusan</th>
+        <th >Nama Guru</th>
+        <th >Nama Mapel</th>
       </tr>
     </thead>
     <tbody>
     
       @foreach($mapel as $m)
         <tr>
-          <td> {{$loop->iteration}}</td>
+          @forelse($m->guru as $guru)
+          <td> {{$guru->nama}}</td>
+          @empty
+           <td style="color: red;"> Belum Ada Guru</td>
+          @endforelse
           <td> {{$m->nama_mapel}}</td>
         
         </tr>

@@ -54,10 +54,7 @@ class RemedialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function detail()
-    {
-        return view('admin.remedial.show');
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -114,7 +111,7 @@ class RemedialController extends Controller
                 'nilai_id' => $nilai->id,
                 'thumbnail' => $filename,
                 'pesan' => $request->pesan,
-                'status' => 'Proses'
+                'status' => 'proses'
             ]); 
             return redirect('/murid/histori-nilai')->with('sukses','Bukti Remedial sudah terkirim');
     }
