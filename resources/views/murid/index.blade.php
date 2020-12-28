@@ -58,19 +58,28 @@
     </div>
   </div>
   <!-- Page content -->
+    
     <div class="row">
       <div class="col-lg-12">
         <div class="card card-profile">
-          <div class="row justify-content-center">
-            <div class="col-lg-3 order-lg-2">
-              <div class="card-profile-image">
-                  <img src="/assets/img/icons/logo-dark.png" class="rounded-circle logo"  >
-              </div>
-            </div>
-          </div>
-          <div class="card-header text-center mt-5">
-            <strong>Profil Siswa</strong>
-          </div>
+            <span style="font-size: 20px; margin-bottom:30px; text-align:center;"><b>Data Nilai Semester Genap</b></span>
+           <canvas id="areaChart" style="width: 100%; height: 300px;max-height:300px;"></canvas>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-profile">
+            <span style="font-size: 20px; margin-bottom:30px; text-align:center;"><b>Data Nilai Semester Ganjil</b></span>
+           <canvas id="myChart" style="width: 100%; height: 300px;max-height:300px;"></canvas>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-profile">
           <div class="card-body pt-0">
             <div class="row">
               <div class="col">
@@ -113,4 +122,5 @@
         </div>
       </div>
     </div>
+    
 @endsection
