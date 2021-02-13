@@ -29,11 +29,18 @@
     
       @foreach($mapel as $m)
         <tr>
-          @forelse($m->guru as $guru)
-          <td> {{$guru->nama}}</td>
-          @empty
-           <td style="color: red;"> Belum Ada Guru</td>
-          @endforelse
+         
+          <td>  
+            @forelse($m->guru as $guru) 
+            {{$guru->nama}},    
+
+            @empty
+            <span style="color: red;">Belum Ada Guru</span>
+             @endforelse
+        </td>
+       
+         
+         
           <td> {{$m->nama_mapel}}</td>
         
         </tr>

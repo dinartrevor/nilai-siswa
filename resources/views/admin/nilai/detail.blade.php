@@ -17,6 +17,7 @@
           <div class="col-lg-6 col-5 text-right">
             <button type="button" class="btn btn-neutral" data-toggle="modal" data-target="#exampleModal">Tambah</button>
             <a href="/admin/murid" class="btn btn-neutral">Kembali</a>
+            <a href="{{route('cetak_nilai_murid', $murid->id)}}" class="btn btn-neutral">Laporan</a>
           </div>
         </div>
       </div>
@@ -100,9 +101,10 @@
               @endforeach
             </tbody>
           </table>
+
         </div>
       </div>
-
+      <span class="alert alert-success">Nilai Rata rata : {{$nilai_rata->rata_rata_nilai}}</span>
     </div>
   </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,7 +121,7 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label class="form-control-label" for="input-username">Mapel</label>
-            <select class="form-control select2" name="mapel_id" id="mapel">
+            <select class="form-control select2" name="mapel_id" id="mapel" required>
               <option>Pilih Mapel</option>
               @foreach($mapel as $s)
                 <option value="{{$s->id}}">{{$s->nama_mapel}}</option>
@@ -128,14 +130,14 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" for="input-username">Guru Mapel</label>
-            <select class="form-control select2" name="guru_id" id="guru">
+            <select class="form-control select2" name="guru_id" id="guru" required>
               <option>Pilih Guru Mapel</option>
              
             </select>
           </div>
           <div class="form-group">
             <label class="form-control-label" for="input-username">Semester</label>
-            <select class="form-control select2" name="semester">
+            <select class="form-control select2" name="semester" required>
               <option>Pilih Semester</option>
               <option value="Ganjil">Ganjil</option>
               <option value="Genap">Genap</option>
@@ -143,7 +145,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" for="input-username">Nilai</label>
-            <input type="number" id="input-username" class="form-control" placeholder="Masukan Nilai" name="nilai_mapel">
+            <input type="number" id="input-username" required class="form-control" placeholder="Masukan Nilai" name="nilai_mapel">
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Send message</button>

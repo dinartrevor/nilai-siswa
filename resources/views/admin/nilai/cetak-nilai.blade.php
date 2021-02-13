@@ -17,27 +17,27 @@
    <table cellspacing="25">
       <tr>
          <th>Nama Peserta :</th>
-         <td>{{auth()->user()->siswa->nama}}</td>
+         <td>{{$siswa->nama}}</td>
          <th>Nis :</th>
-         <td>{{auth()->user()->siswa->nis}}</td>
+         <td>{{$siswa->nis}}</td>
       </tr>
       <tr>
         <th>Kelas/Jurusan :</th>
-         <td>{{auth()->user()->siswa->kelas->nama_kelas}} / {{auth()->user()->siswa->kelas->nama_jurusan}}</td>
+         <td>{{$siswa->kelas->nama_kelas}} / {{$siswa->kelas->nama_jurusan}}</td>
         <th>Tahun Ajaran :</th>
-        <td>{{auth()->user()->siswa->kelas->tahun_ajaran}}</td>
+        <td>{{$siswa->kelas->tahun_ajaran}}</td>
       </tr>
       <tr>
         <th>Email :</th>
-         <td>{{auth()->user()->siswa->email}}</td>
+         <td>{{$siswa->email}}</td>
         <th>Agama :</th>
-        <td>{{auth()->user()->siswa->agama}}</td>
+        <td>{{$siswa->agama}}</td>
       </tr>
       <tr>
         <th>Jenis Kelamin :</th>
-        <td>{{auth()->user()->siswa->jenis_kelamin}}</td>
+        <td>{{$siswa->jenis_kelamin}}</td>
         <th>Alamat :</th>
-        <td>{{auth()->user()->siswa->alamat}}</td>
+        <td>{{$siswa->alamat}}</td>
       </tr>
   </table>
   <table border="1" style="text-align: center;" >
@@ -76,7 +76,8 @@
       <tr>
         <th width="100px">Remed</th>
         <th width="100px">Lulus</th>
-        <th width="100px">Rata Rata</th>
+         <th width="100px">Rata Rata Nilai</th>
+      </tr>
       </tr>
     </thead>
     <tbody>
@@ -84,7 +85,7 @@
         <tr>
           <td ><span style="color: red;">{{$remed}}</span></td>
           <td ><span style="color: green;">{{$lulus}}</span></td>
-           <td ><span style="color: blue;">{{$nilai_rata->rata_rata_nilai}}</span></td>
+          <td ><span style="color: blue;">{{$nilai_rata->rata_rata_nilai}}</span></td>
         </tr>
 
     </tbody>

@@ -15,10 +15,10 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
-              <form>
+             <!--  <form>
                 <input type="text" name="search" autocomplete="off" id="search" placeholder="Cari Siswa yang remedial">
                 <button class="btn btn-neutral">Cari</button>
-              </form>
+              </form> -->
           </div>
         </div>
       </div>
@@ -33,33 +33,42 @@
   <div class="row">
     <div class="col-md-12">
     @foreach ($remedial as $item)
+      @php
+          $remedial_nilai=$item->remedial;
+          
+          $remedial_nilai = !empty($remedial_nilai) && isset($remedial_nilai[0]) ? $remedial_nilai[0] : null;
+      @endphp
+      @if(@$remedial_nilai->status == 'selesai')
+
+      @else
       <div class="card">
-        <h5 class="card-header">{{$item->siswa ? $item->siswa->nama : "Tidak Ada yang Remed"}}</h5>
+        <div class="card-header">
+          <h5>{{$item->siswa ? $item->siswa->nama : "Tidak Ada yang Remed"}}</h5>
+          @if(@$remedial_nilai->status == 'proses')
+          <span class="badge badge-success float-right">Remedial Sudah di kerjakan</span>
+          @else
+            <span class="badge badge-danger float-right">Remedial belum di kerjakan</span>
+          @endif
+        </div>
+
         <div class="card-body">
           <h5 class="card-title">Mata Pelajaran : {{$item->mapel ? $item->mapel->nama_mapel : "Tidak Ada Yang Remedial"}}</h5>
             <h5 class="card-title">Guru Mata Pelajaran : {{$item->guru ? $item->guru->nama: "Tidak Ada Yang Remedial"}}</h5>
-             @if ($item->status == 'Remed')
+              @if(@$remedial_nilai->status == 'proses')
               <a href="{{route('detail.remedial',$item->id)}}" class="btn btn-primary">Selengkapnya</a>
+
+
               @else
-              {{-- <span class="badge badge-success">Lulus</span> --}}
+             <span class="badge badge-danger">Belum Di kerjakan</span> 
               @endif
           
         </div>
       </div>
+      @endif
     @endforeach
-      <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#">Previous</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
+    @include('pagination.default', ['paginator' => $remedial])
+    
+      
       </div>
     </div>
   </div>

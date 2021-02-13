@@ -73,7 +73,7 @@
                       '<span class="btn btn-sm btn-danger"> Bukan Guru Pengajar</span>'
                     !!}
                   </td>
-                  <td>{{$g->tempat_lahir}} - {{$g->tanggal_lahir}}</td>
+                  <td>{{$g->tempat_lahir}} - {{Carbon\Carbon::parse($g->tanggal_lahir)->format('d-m-Y')}}</td>
                   <td>{{$g->jenis_kelamin}}</td>
                   <td>{{$g->nomer_hp}}</td>
                   <td>

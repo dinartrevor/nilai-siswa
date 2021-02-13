@@ -94,7 +94,11 @@ class GuruController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $guru = Guru::where('id', $id)->first();
+        $guru->update($data);
+        return redirect('/admin/guru');
     }
 
     /**
@@ -114,6 +118,7 @@ class GuruController extends Controller
       
         $guru = Guru::with('mapel')->get();
         // dd($guru);
+         set_time_limit(300);
             $pdf = PDF::loadView('admin.guru.cetak',compact('guru'));
             $pdf->setPaper('a4','landscape');
     

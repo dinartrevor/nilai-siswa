@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Siswa;
 use App\Nilai;
-use Auth;
+use Auth, DB;
 use PDF;
 class NilaiController extends Controller
 {
@@ -19,9 +19,11 @@ class NilaiController extends Controller
     {
         $siswa = Siswa::where('user_id', Auth::user() ? Auth::id() : "")->first();
         $nilai = Nilai::where('siswa_id', $siswa ? $siswa->id : "" )->get();
-      
+         $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
+        ->where('siswa_id', $siswa->id)
+        ->first();
  
-        return view('murid.histori-nilai', compact('nilai'));
+        return view('murid.histori-nilai', compact('nilai','nilai_rata'));
     }
 
     /**
@@ -95,7 +97,10 @@ class NilaiController extends Controller
         $nilai = Nilai::where('siswa_id', $siswa->id )->get();
         $remed = Nilai::where('status', 'Remed')->where('siswa_id', $siswa->id)->count();
         $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa->id)->count();
-        $pdf = PDF::loadView('murid.cetak-nilai',compact('siswa', 'nilai','remed','lulus'));
+         $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
+        ->where('siswa_id', $siswa->id)
+        ->first();
+        $pdf = PDF::loadView('murid.cetak-nilai',compact('siswa', 'nilai','remed','lulus','nilai_rata'));
         $pdf->setPaper('a4','potrait');
 
         return $pdf->stream();

@@ -23,6 +23,6 @@ class Nilai extends Model
     }
     public function remedial()
     {
-        return $this->hasOne(Remedial::class);
+        return $this->hasMany(Remedial::class);
     }
 }

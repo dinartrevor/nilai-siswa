@@ -135,7 +135,8 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+    'faker_locale' => 'id_ID',
+    
     'providers' => [
 
         /*

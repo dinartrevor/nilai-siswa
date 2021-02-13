@@ -15,23 +15,26 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
+
             <a href="{{route('cetakNilai')}}" target="_blank" class="btn  btn-neutral">Cetak</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-   <div class="col-md-12">
+   <div class="col-md-12 mb-5">
     @if($message=Session::get('sukses'))
       <div class="alert alert-success alert-block">
         <button type="button"class="close" data-dismiss="alert">X</button>
         <strong>{{$message}}</strong>
       </div>
     @endif
+
       <div class="card">
           <!-- Card header -->
         <div class="card-header border-0">
           <h3 class="mb-0">Nilai Siswa</h3>
+
         </div>
         <!-- Light table -->
         <div class="table-responsive">
@@ -52,6 +55,11 @@
                 $no= 1
               @endphp
               @foreach($nilai as $m)
+                @php
+                    $remedial_nilai=$m->remedial;
+                    
+                    $remedial_nilai = !empty($remedial_nilai) && isset($remedial_nilai[0]) ? $remedial_nilai[0] : null;
+                @endphp
                 <tr>
                   <td>
                     {{$no++}}
@@ -65,10 +73,11 @@
                     <td ><span class="badge badge-success">Lulus</span></td>
                   @endif
                   <td >{{$m->semester}}</td>
-                  <td >{{$m->guru->nama}}</td>
+                  <td >{{$m->guru ? $m->guru->nama : "tidak afa guru"}}</td>
                     @if ($m->status == 'Remed')
                     {{-- {{dd($m->remedial)}} --}}
-                    @if (@$m->remedial->status == 'proses')
+
+                    @if (@$remedial_nilai->status == 'proses')
                      <td><button type="button" class="btn  btn-info" disabled>Proses</button></td>
                     @else
                     <td><a href="{{route('remedial', $m->id)}}" class="btn  btn-warning">Bereskan Remedial</a></td>
@@ -81,5 +90,10 @@
             </tbody>
           </table>
         </div>
+     
       </div>
+       <span class="alert alert-success">Nilai Rata rata : {{$nilai_rata->rata_rata_nilai}}</span>
+  </div>
+
+
 @endsection

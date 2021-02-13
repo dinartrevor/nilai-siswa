@@ -16,13 +16,11 @@ class RemedialController extends Controller
      */
     public function index()
     {
-        $siswa_remed = Remedial::where('status', '!=', 'selesai')->first();
-        if($siswa_remed){
+       
             $remedial = Nilai::where('status', '=', 'Remed')->orderBy('created_at','Desc')->paginate(4);
+            // dd($remedial);
             return view('admin.remedial.index', compact('remedial'));
-        }
-        // $remedial = Nilai::where('status', '=', 'Remed')->orderBy('created_at','Desc')->paginate(4);
-        return redirect()->back()->with('message', 'Belum Ada yang menyerahkan Remedial');   ;          
+               
 // dd($remedial);
         
     }
@@ -107,6 +105,7 @@ class RemedialController extends Controller
                 $request->thumbnail = $filename;
             }
             $remedial = Remedial::create([
+           
                 'siswa_id' => $siswa,
                 'nilai_id' => $nilai->id,
                 'thumbnail' => $filename,
@@ -116,19 +115,24 @@ class RemedialController extends Controller
             return redirect('/murid/histori-nilai')->with('sukses','Bukti Remedial sudah terkirim');
     }
     public function detail($id){
-        $siswa_remed = Remedial::where('status', '!=', 'selesai')->first();
+        // dd($id);
+        $nilai = Nilai::find($id);
+            
+        $remedial = $nilai->remedial;
+        // dd($remedial);
+$remedial = !empty($remedial) && isset($remedial[0]) ? $remedial[0] : null;
+        $siswa = $nilai->siswa;
+        $siswa_remed = Remedial::where('id', @$remedial->id)->where('status', '!=', 'selesai')->first();
+        // dd($siswa_remed);
         if($siswa_remed){
-            $nilai = Nilai::find($id);
-            if($nilai){
-                $remedial = $nilai->remedial;
-                $siswa = $nilai->siswa;
-                // dd($siswa->kelas);  
-            }
+          
+                 return view('admin.remedial.show', compact('nilai', 'remedial','siswa'));
+            
         //    dd($nilai);
     
-            return view('admin.remedial.show', compact('nilai', 'remedial','siswa'));
+           
         }
-        return redirect('/')->with('message', 'Belum Ada yang menyerahkan Remedial');   
+        return redirect()->back()->with('message', 'Siswa Ini Belum menyerahkan Remedial');   
     }
     public function detailUpdate(Request $request, $id){
         $data = $request->all();
@@ -154,7 +158,7 @@ class RemedialController extends Controller
             $remedial->save();
         }
         DB::commit();
-        return redirect()->back();
+        return redirect('/')->with('message', 'Siswa Ini Sudah Beres Remedial');   
      
     } catch (\Exception $ex) {
         DB::rollback();

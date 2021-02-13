@@ -8,6 +8,8 @@ use App\Siswa;
 use App\Mapel;
 use App\Nilai;
 use App\Guru;
+use Auth, DB;
+use PDF;
 class NilaiController extends Controller
 {
     /**
@@ -79,8 +81,12 @@ class NilaiController extends Controller
     {
         $mapel = Mapel::all();
         $guru = Guru::all();
-        $nilai = Nilai::where('siswa_id', $murid->id)->get();
-        return view('admin.nilai.detail', compact('murid', 'nilai', 'mapel','guru'));
+        $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
+        ->where('siswa_id', $murid->id)
+        ->first();
+        $nilai = Nilai::where('siswa_id', $murid->id)
+        ->get();
+        return view('admin.nilai.detail', compact('murid', 'nilai', 'mapel','guru','nilai_rata'));
     }
 
     /**
@@ -122,5 +128,20 @@ class NilaiController extends Controller
         // dd();
         $sub = Guru::where('mapel_id', '=', $request->mapel_id)->get();
         return response()->json($sub);
+    }
+
+    public function cetak_nilai($murid){
+        $siswa = Siswa::where('id', $murid)->first();
+        $nilai = Nilai::where('siswa_id', $siswa->id )->get();
+        $remed = Nilai::where('status', 'Remed')->where('siswa_id', $siswa->id)->count();
+        $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa->id)->count();
+         $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
+        ->where('siswa_id', $siswa->id)
+        ->first();
+        $pdf = PDF::loadView('admin.nilai.cetak-nilai',compact('siswa', 'nilai','remed','lulus','nilai_rata'));
+        $pdf->setPaper('a4','potrait');
+
+        return $pdf->stream();
+           
     }
 }

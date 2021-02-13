@@ -107,6 +107,8 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $murid)
     {
+        $users = User::where('id', $murid->user_id)->first();
+
         $murid->update([
             'nis' => $request->nis,
             'nama' => $request->nama,
@@ -121,8 +123,18 @@ class SiswaController extends Controller
             'kelas_id' => $request->tahun_ajaran,
             'asal_sekolah' => $request->asal_sekolah
         ]);
+
+   
+        $users->name = $request->nama;
+        $users->email = $request->email;
+        $users->password = bcrypt($request->nis);
+        $users->level = "siswa";
+        $users->save();
+
+            
+         return redirect('/admin/murid')->with('update', 'Data Siswa Telah diupdate');
         
-        return redirect('/admin/murid')->with('update', 'Data Siswa Telah diupdate');
+       
     }
 
     /**
@@ -141,9 +153,10 @@ class SiswaController extends Controller
     public function cetak(){
         $siswa = Siswa::with('kelas')->get();
         // dd($guru);
-            $pdf = PDF::loadView('admin.siswa.cetak',compact('siswa'));
-            $pdf->setPaper('a4','landscape');
-    
-            return $pdf->stream();
+        set_time_limit(300);
+        $pdf = PDF::loadView('admin.siswa.cetak',compact('siswa'));
+        $pdf->setPaper('a4','landscape');
+
+        return $pdf->stream();
     }
 }

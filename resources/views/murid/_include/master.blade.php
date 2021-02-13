@@ -209,6 +209,30 @@
       options: areaChartOptionsGanjil
     })
   });
+    $('.toggle-password').click(function(){
+        var next = $(this).next();
+        if ($('#password_lama').attr('type') == 'text') {
+          $('#password_lama').attr('type', 'password');
+        } else {
+          $('#password_lama').attr('type', 'text');
+        }
+    });
+    $('.toggle-new-password').click(function(){
+        var next = $(this).next();
+        if ($('#new_password').attr('type') == 'text') {
+          $('#new_password').attr('type', 'password');
+        } else {
+          $('#new_password').attr('type', 'text');
+        }
+    });
+     $('.toggle-confirm-password').click(function(){
+        var next = $(this).next();
+        if ($('#confirm_password').attr('type') == 'text') {
+          $('#confirm_password').attr('type', 'password');
+        } else {
+          $('#confirm_password').attr('type', 'text');
+        }
+    });
   </script>
 </body>
 

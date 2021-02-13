@@ -80,22 +80,40 @@
                 <hr>
               </div>
               </div>
-              <div class="col-lg-12">
+                <div class="col-lg-12">
                 <div class="form-group">
-                  <label class="form-control-label" for="input-username">Password Saat Ini</label>
-                     <input type="password" id="input-username" class="form-control"  name="password_lama">
+                   <label class="form-control-label" for="input-username">Password Saat Ini</label>
+                  <div class="input-group">
+                   
+                    <input type="password" id="password_lama" class="form-control" name="password_lama" aria-describedby="basic-addon2">
+                    <div class="input-group-append toggle-password">
+                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye"></i></span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group">
-                  <label class="form-control-label" for="input-username">Password Baru</label>
-                     <input type="password" id="input-username" class="form-control"  name="new_password">
+                    <label class="form-control-label" for="input-username">Password Baru</label>
+                    <div class="input-group">
+                  
+                       <input type="password" id="new_password" class="form-control"name="new_password">
+                       <div class="input-group-append toggle-new-password">
+                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye"></i></span>
+                      </div>
+                    </div>
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group">
-                  <label class="form-control-label" for="input-username">Konfirmasi Password</label>
-                     <input type="password" id="input-username" class="form-control"  name="confirm_password">
+                    <label class="form-control-label" for="input-username">Konfirmasi Password</label>
+                    <div class="input-group">
+                  
+                     <input type="password" id="confirm_password" class="form-control"  name="confirm_password">
+                      <div class="input-group-append toggle-confirm-password">
+                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye"></i></span>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>

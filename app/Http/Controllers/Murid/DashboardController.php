@@ -25,17 +25,19 @@ class DashboardController extends Controller
          $ganjil = Nilai::where('semester', 'Ganjil')->first();
         $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa ? $siswa->id: "")->count();
         $semester1 = Nilai::leftjoin('siswa', 'nilai.siswa_id', '=', 'siswa.id')
-        ->leftjoin('users','siswa.user_id','=','users.id')
         ->leftjoin('mapel', 'nilai.mapel_id', '=', 'mapel.id')
-         ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
-        ->where('nilai.semester', '=', $genap->semester)
+        ->where('siswa.user_id', $siswa->user_id)
+        ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
+        ->where('nilai.semester', '=', $genap ? $genap->semester : "")
         ->distinct() 
         ->get();
+        // dd($semester1);
         $semester2 = Nilai::leftjoin('siswa', 'nilai.siswa_id', '=', 'siswa.id')
-        ->leftjoin('users','siswa.user_id','=','users.id')
         ->leftjoin('mapel', 'nilai.mapel_id', '=', 'mapel.id')
+          ->where('siswa.user_id', $siswa->user_id)
+
          ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
-        ->where('nilai.semester', '=', $ganjil->semester)
+        ->where('nilai.semester', '=', $ganjil ? $ganjil->semester : "")
         ->distinct() 
         ->get();
       

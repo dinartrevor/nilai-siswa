@@ -58,7 +58,15 @@
     </div>
   </div>
   <!-- Page content -->
-    
+     <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-profile">
+            <span style="font-size: 20px; margin-bottom:30px; text-align:center;"><b>Data Nilai Semester Ganjil</b></span>
+           <canvas id="myChart" style="width: 100%; height: 300px;max-height:300px;"></canvas>
+        </div>
+      </div>
+      
+    </div>
     <div class="row">
       <div class="col-lg-12">
         <div class="card card-profile">
@@ -68,15 +76,7 @@
       </div>
       
     </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card card-profile">
-            <span style="font-size: 20px; margin-bottom:30px; text-align:center;"><b>Data Nilai Semester Ganjil</b></span>
-           <canvas id="myChart" style="width: 100%; height: 300px;max-height:300px;"></canvas>
-        </div>
-      </div>
-      
-    </div>
+   
     <div class="row">
       <div class="col-lg-12">
         <div class="card card-profile">
