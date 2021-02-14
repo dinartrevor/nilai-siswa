@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Siswa;
 use App\Kelas;
 use App\User;
+use App\Jurusan;
+use App\KelasJurusan;
 use App\Mail\MailNotify;
 use Illuminate\Support\Facades\Mail;
 use PDF;
+use DB;
 class SiswaController extends Controller
 {
     /**
@@ -31,7 +34,8 @@ class SiswaController extends Controller
     public function create()
     {
         $kelas = Kelas::all();
-        return view('admin.siswa.tambah', compact('kelas'));
+        $jurusan = Jurusan::all();
+        return view('admin.siswa.tambah', compact('kelas', 'jurusan'));
     }
 
     /**
@@ -42,11 +46,14 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
         $request->validate([
             'nama'=>'min:5|required',
             'nis'=>'min:5|required|unique:siswa',
             'email' => 'required|unique:users',
         ]);
+         DB::beginTransaction();
+        try {
         $user= User::create([
 
             'name' => $request->nama,
@@ -54,7 +61,7 @@ class SiswaController extends Controller
             'password' => bcrypt($request->nis),
             'level' => "siswa"
         ]);
-        Siswa::create([
+       $siswa =  Siswa::create([
             'nis' => $request->nis,
             'nama' => $request->nama,
             'email' => $request->email,
@@ -63,15 +70,22 @@ class SiswaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'agama' => $request->agama,
             'alamat' => $request->alamat,
-            'kelas_id' => $request->kelas_id,
-            'kelas_id' => $request->jurusan,
-            'kelas_id' => $request->tahun_ajaran,
             'asal_sekolah' => $request->asal_sekolah,
+            'tahun_ajaran'=> $request->tahun_ajaran,
             'user_id' => $user->id
         ]);
-        Mail::to($request->email)->send(new MailNotify());
+      
+        KelasJurusan::create(['siswa_id' => $siswa['id'],
+            'kelas_id' => $request->kelas_id,
+            'jurusan_id' => $request->jurusan]);
+         DB::commit();
 
         return redirect('/admin/murid')->with('sukses', 'Data Siswa Telah ditambahkan');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            throw $ex;
+        }
+          return redirect()->back();
     }
 
     /**
@@ -82,8 +96,14 @@ class SiswaController extends Controller
      */
     public function show(Siswa $murid)
     {
-        $murid = Siswa::all()->first();
-        return view('admin.siswa.detail', compact('murid'));
+        $murid = Siswa::where('id',$murid->id)->first();
+        $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $murid->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
+        return view('admin.siswa.detail', compact('murid','murid_kelas_jurusan'));
     }
 
     /**
@@ -92,10 +112,12 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Siswa $murid, Kelas $kelas)
+    public function edit(Siswa $murid)
     {
         $kelas = Kelas::all();
-        return view('admin.siswa.edit', compact('murid', 'kelas'));
+        $jurusan = Jurusan::all();
+        $kelasJurusan = KelasJurusan::where('siswa_id',$murid->id)->select(['siswa_id','kelas_id', 'jurusan_id'])->get();
+        return view('admin.siswa.edit', compact('murid', 'kelas','kelasJurusan','jurusan'));
     }
 
     /**
@@ -130,8 +152,10 @@ class SiswaController extends Controller
         $users->password = bcrypt($request->nis);
         $users->level = "siswa";
         $users->save();
-
-            
+        DB::delete('delete from kelas_jurusan where siswa_id = ?',[$murid->id]);
+        KelasJurusan::create(['siswa_id' => $murid->id,
+            'kelas_id' => $request->kelas_id,
+            'jurusan_id' => $request->jurusan]);
          return redirect('/admin/murid')->with('update', 'Data Siswa Telah diupdate');
         
        
@@ -151,12 +175,32 @@ class SiswaController extends Controller
     }
 
     public function cetak(){
-        $siswa = Siswa::with('kelas')->get();
-        // dd($guru);
+        // $siswa = Siswa::all();
+        $siswa_laki = Siswa::where('jenis_kelamin', 'Laki-Laki')->get()->count();
+        $siswa_wanita = Siswa::where('jenis_kelamin', 'Wanita')->get()->count();
+   
+        $siswa = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan','siswa.*')
+        ->get();
+        // dd($siswa);
         set_time_limit(300);
-        $pdf = PDF::loadView('admin.siswa.cetak',compact('siswa'));
+        $pdf = PDF::loadView('admin.siswa.cetak',compact('siswa', 'siswa_wanita', 'siswa_laki'));
         $pdf->setPaper('a4','landscape');
 
         return $pdf->stream();
+    }
+    public function rangking(){
+        $siswa = Siswa::join('nilai', 'siswa.id', '=', 'nilai.siswa_id')
+        ->join('kelas_jurusan', 'siswa.id','=','kelas_jurusan.siswa_id')
+        ->join('kelas', 'kelas_jurusan.kelas_id','=','kelas.id')
+        ->join('jurusan', 'kelas_jurusan.jurusan_id','=','jurusan.id')
+        ->select('siswa.nama','kelas.nama_kelas','jurusan.nama_jurusan',DB::raw('AVG(nilai.nilai_mapel)  as rata_rata_nilai'))
+        ->orderby('rata_rata_nilai','desc')
+        ->where('nilai.nilai_mapel', '>=', 70.0)
+        ->groupby('siswa.id')
+        ->get();
+       dd($siswa);
     }
 }

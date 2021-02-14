@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Kelas;
-use PDF;
+use App\Jurusan;
+use App\Siswa;
+use PDF, DB;
 class KelasController extends Controller
 {
     /**
@@ -16,7 +18,8 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::all();
-        return view('admin.kelas.index', compact('kelas'));
+        $jurusan = Jurusan::all();
+        return view('admin.kelas.index', compact('kelas','jurusan'));
     }
 
     /**
@@ -26,7 +29,9 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('admin.kelas.tambah');
+        $kelas = Kelas::all();
+         $jurusan = Jurusan::all();
+        return view('admin.kelas.tambah', compact("kelas","jurusan"));
     }
 
     /**
@@ -37,12 +42,30 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        Kelas::create([
-            'nama_kelas' => $request->nama_kelas,
-            'nama_jurusan' => $request->nama_jurusan,
-            'tahun_ajaran' => $request->tahun_ajaran
-        ]);
-        return redirect('admin/kelas')->with('sukses','Data Kelas telah ditambahkan');
+        $kelas = Kelas::where('nama_kelas', $request->nama_kelas)->first();
+
+    
+        if(!$kelas){
+            Kelas::create([
+                'nama_kelas' => $request->nama_kelas,
+            ]);
+            return redirect('admin/kelas')->with('sukses','Data Kelas telah ditambahkan');
+        }else{
+            return redirect('admin/kelas')->with('destroy',' Data Kelas sudah ada');
+        }
+       
+    }
+    public function AddJurusan(Request $request){
+        $jurusan = Jurusan::where('nama_jurusan', $request->nama_jurusan)->first();
+         if(!$jurusan){
+            Jurusan::create([
+                'nama_jurusan' => $request->nama_jurusan,
+            ]);
+            return redirect('admin/kelas')->with('sukses','Data Kelas & Jurusan telah ditambahkan');
+        }else{
+                return redirect('admin/kelas')->with('destroy',' Data Jurusan sudah ada');
+        }
+
     }
 
     /**
@@ -97,9 +120,22 @@ class KelasController extends Controller
 
         return redirect('admin/kelas')->with('destroy','Data Kelas berhasil dihapus');
     }
+    public function destroyJurusan(Jurusan $jurusan)
+    {
+        $jurusan->delete();
+
+        return redirect('admin/kelas')->with('destroy','Data Jurusan berhasil dihapus');
+    }
     public function cetak(){
-        $kelas = Kelas::get();
-        // dd($guru);
+        $kelas = Kelas::join('kelas_jurusan', 'kelas.id', '=', 'kelas_jurusan.kelas_id')
+        ->join('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->join('siswa', 'kelas_jurusan.siswa_id', '=', 'siswa.id')
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan', DB::raw('count(siswa.id) as jumlah_siswa'))
+        ->groupby('kelas.id','jurusan.id')
+        ->orderby('kelas.nama_kelas', 'asc')
+        ->get();
+
+        // dd($kelas);
             $pdf = PDF::loadView('admin.kelas.cetak',compact('kelas'));
             $pdf->setPaper('a4','landscape');
     

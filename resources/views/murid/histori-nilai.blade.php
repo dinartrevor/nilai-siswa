@@ -16,6 +16,8 @@
           </div>
           <div class="col-lg-6 col-5 text-right">
 
+            <a href="{{route('ganjil')}}" target="_blank" class="btn  btn-neutral">Ganjil</a>
+            <a href="{{route('genap')}}" target="_blank" class="btn  btn-neutral">Genap</a>
             <a href="{{route('cetakNilai')}}" target="_blank" class="btn  btn-neutral">Cetak</a>
           </div>
         </div>

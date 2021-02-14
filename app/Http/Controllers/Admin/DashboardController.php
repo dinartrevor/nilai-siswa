@@ -8,7 +8,7 @@ use App\Mapel;
 use App\Kelas;
 use App\Siswa;
 use App\Guru;
-
+use App\Jurusan;
 class DashboardController extends Controller
 {
     /**
@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $mapel = Mapel::all();
         $guru = Guru::all();
         $siswa = Siswa::all();
-        $kelas = Kelas::groupBy('nama_jurusan')->selectRaw('count(*) as total, nama_jurusan')->get();
+        $kelas = Jurusan::all();
         return view('index', compact('mapel','kelas','siswa', 'guru'));
     }
 

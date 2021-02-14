@@ -42,10 +42,14 @@
           <strong>{{$message}}</strong>
         </div>
       @endif
-      <div class="card">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+       <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">
-          <h3 class="mb-0">Kelas & Jurusan</h3>
+          <h3 class="mb-0">Kelas</h3>
         </div>
         <!-- Light table -->
         <div class="table-responsive">
@@ -54,8 +58,6 @@
               <tr>
                 <th >No</th>
                 <th >Kelas</th>
-                <th >Jurusan</th>
-                <th >Tahun Ajaran</th>
                 <th >Aksi</th>
               </tr>
             </thead>
@@ -72,14 +74,45 @@
                     {{$k->nama_kelas}}
                   </td>
                   <td>
+                    <a href="{{route('hapus-kelas', $k->id)}}" class="btn btn-danger">Hapus</a>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+       <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+          <h3 class="mb-0">Jurusan</h3>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table" id="dataTabless">
+            <thead class="thead-light">
+              <tr>
+                <th >No</th>
+                <th >Jurusan</th>
+                <th >Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+                $no= 1
+              @endphp
+              @foreach ($jurusan as $k)
+                <tr>
+                  <td>
+                    {{$no++}}
+                  </td>
+                  <td>
                     {{$k->nama_jurusan}}
                   </td>
                   <td>
-                    {{$k->tahun_ajaran}}
-                  </td>
-                  <td>
-                    <a href="{{url('admin/kelas/edit-kelas/'.$k->id)}}" class="btn  btn-success">Edit</a>
-                    <a href="{{route('hapus-kelas', $k->id)}}" class="btn btn-danger">Hapus</a>
+                    <a href="{{route('hapus-jurusan', $k->id)}}" class="btn btn-danger">Hapus</a>
                   </td>
                 </tr>
               @endforeach

@@ -51,10 +51,10 @@
                   <i class="ni location_pin mr-2"></i>{{$murid->alamat}}
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>{{$murid->kelas->nama_kelas}} {{$murid->kelas->nama_jurusan}}
+                  <i class="ni business_briefcase-24 mr-2"></i>{{$murid_kelas_jurusan->nama_kelas}} {{$murid_kelas_jurusan->nama_jurusan}}
                 </div>
                 <div class="h5">
-                  <i class="ni business_briefcase-24 mr-2"></i>Tahun Ajaran: {{$murid->kelas->tahun_ajaran}}
+                  <i class="ni business_briefcase-24 mr-2"></i>Tahun Ajaran: {{$murid->tahun_ajaran}}
                 </div>
                 <div class="h5 mt-4">
                   <i class="ni business_briefcase-24 mr-2"></i>{{$murid->tempat_lahir}} {{$murid->tanggal_lahir}}

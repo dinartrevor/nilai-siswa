@@ -24,10 +24,11 @@
         <th >NIS</th>
         <th >Nama</th>
         <th >Tempat </th>
-         <th> Tanggal Lahir</th>
+        <th> Tanggal Lahir</th>
         <th >Kelas </th>
         <th >Jurusan </th>
         <th >Jenis Kelamin</th>
+        <th >Tahun Ajaran</th>
         <th >Email</th>
       </tr>
     </thead>
@@ -39,13 +40,29 @@
           <td >{{$m->nis}}</td>
           <td >{{$m->nama}}</td>
           <td >{{$m->tempat_lahir}}</td><td> {{$m->tanggal_lahir}}</td>
-          <td >{{$m->kelas->nama_kelas}}</td>
-          <td> {{$m->kelas->nama_jurusan}}</td>
+          <td >{{$m->nama_kelas}}</td>
+          <td> {{$m->nama_jurusan}}</td>
+       
           <td >{{$m->jenis_kelamin}}</td>
+          <td >{{$m->tahun_ajaran}}</td>
           <td >{{$m->email}}</td>
         </tr>
       @endforeach
     </tbody>
   </table>
+  
+  <table style="text-align: center;" class="table table-bordered">
+    <thead>
+      <tr>
+        <th >Laki Laki</th>
+        <th >Wanita</th>
+      </tr>
+       <tbody>
+        <tr>
+          <td >{{$siswa_laki}}</td>
+          <td >{{$siswa_wanita}}</td>
+        </tr>
+    </tbody>
+    </thead>
 </body>
 </html>

@@ -23,15 +23,16 @@
       
         <th >Kelas</th>
         <th >Jurusan</th>
+        <th>Siswa</th>
       </tr>
     </thead>
     <tbody>
     
       @foreach($kelas as $m)
         <tr>
-          <td> {{$loop->iteration}}</td>
+          <td> {{$m->nama_kelas}}</td>
           <td> {{$m->nama_jurusan}}</td>
-        
+          <td>{{$m->jumlah_siswa}}</td>
         </tr>
       @endforeach
     </tbody>

@@ -50,8 +50,8 @@
             <strong class="card-text">{{$murid->nama}}</strong>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{$murid->kelas->nama_kelas}} {{$murid->kelas->nama_jurusan}} </li>
-            <li class="list-group-item">{{$murid->kelas->tahun_ajaran}}</li>
+            <li class="list-group-item">{{$murid_kelas_jurusan->nama_kelas}} {{$murid_kelas_jurusan->nama_jurusan}} </li>
+            <li class="list-group-item">{{$murid->tahun_ajaran}}</li>
             <li class="list-group-item">{{$murid->jenis_kelamin}}</li>
           </ul>
         </div>

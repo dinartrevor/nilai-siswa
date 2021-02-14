@@ -78,6 +78,9 @@
     $('#dataTables').DataTable([{
       responsive : true
     }]);
+        $('#dataTabless').DataTable([{
+      responsive : true
+    }]);
     $('.select2').select2();
     $('#mapel').on('change',function(e){
 	

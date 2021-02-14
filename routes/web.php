@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/murid/edit-murid/{murid}', 'Admin\SiswaController@edit')->name('editMurid');
   Route::post('/admin/murid/edit-murid/{murid}/update', 'Admin\SiswaController@update')->name('updateMurid');
   Route::get('/admin/murid/cetak','Admin\SiswaController@cetak')->name('cetak_murid');
+   Route::get('/admin/murid/rangking','Admin\SiswaController@rangking')->name('rangking');
 
   Route::get('/admin/guru','Admin\GuruController@index');
   Route::get('/admin/guru/tambah','Admin\GuruController@create')->name('tambah_guru');
@@ -40,9 +41,11 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/kelas','Admin\KelasController@index');
   Route::get('/admin/kelas/tambah','Admin\KelasController@create')->name('tambah_kelas');
   Route::post('/admin/kelas/tambah/add','Admin\KelasController@store')->name('addKelas');
+  Route::post('/admin/kelas/tambah/add/jurusan','Admin\KelasController@AddJurusan')->name('AddJurusan');
   Route::get('/admin/kelas/edit-kelas/{kelas}', 'Admin\KelasController@edit');
   Route::post('/admin/kelas/edit-kelas/{kelas}/update', 'Admin\KelasController@update')->name('updateKelas');
   Route::get('/admin/kelas/delete-kelas/{kelas}', 'Admin\KelasController@destroy')->name('hapus-kelas');
+  Route::get('/admin/kelas/delete-jurusan/{jurusan}', 'Admin\KelasController@destroyJurusan')->name('hapus-jurusan');
   Route::get('/admin/kelas/cetak','Admin\KelasController@cetak')->name('report_kelas');
 
   Route::get('/admin/mapel','Admin\MapelController@index');
@@ -68,6 +71,8 @@ Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
   Route::get('/murid', 'Murid\DashboardController@index');
   Route::get('/murid/histori-nilai', 'Murid\NilaiController@index');
   Route::get('/murid/cetak-nilai','Murid\NilaiController@export_pdf')->name('cetakNilai');
+   Route::get('/murid/cetak-nilai/ganjil','Murid\NilaiController@ganjil')->name('ganjil');
+   Route::get('/murid/cetak-nilai/genap','Murid\NilaiController@genap')->name('genap');
   Route::get('/murid/edit-profil','Murid\SiswaController@editProfil')->name('editProfil');
   Route::post('/murid/edit-profil/{id}','Murid\SiswaController@editProfilSiswa')->name('editProfileSiswa');
   Route::get('/murid/remedial/{nilai}','RemedialController@remedial_murid')->name('remedial');

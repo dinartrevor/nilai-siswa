@@ -22,6 +22,7 @@ class CreateSiswaTable extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin');
+            $table->string('tahun_ajaran')->nullable();
             $table->string('agama');
             $table->text('alamat')->nullable();
             $table->string('asal_sekolah');

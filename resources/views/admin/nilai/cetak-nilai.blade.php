@@ -23,9 +23,9 @@
       </tr>
       <tr>
         <th>Kelas/Jurusan :</th>
-         <td>{{$siswa->kelas->nama_kelas}} / {{$siswa->kelas->nama_jurusan}}</td>
+         <td>{{$murid_kelas_jurusan->nama_kelas}} / {{$murid_kelas_jurusan->nama_jurusan}}</td>
         <th>Tahun Ajaran :</th>
-        <td>{{$siswa->kelas->tahun_ajaran}}</td>
+        <td>{{$siswa->tahun_ajaran}}</td>
       </tr>
       <tr>
         <th>Email :</th>

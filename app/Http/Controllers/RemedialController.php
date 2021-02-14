@@ -124,9 +124,15 @@ $remedial = !empty($remedial) && isset($remedial[0]) ? $remedial[0] : null;
         $siswa = $nilai->siswa;
         $siswa_remed = Remedial::where('id', @$remedial->id)->where('status', '!=', 'selesai')->first();
         // dd($siswa_remed);
+        $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $siswa->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
         if($siswa_remed){
           
-                 return view('admin.remedial.show', compact('nilai', 'remedial','siswa'));
+                 return view('admin.remedial.show', compact('nilai', 'remedial','siswa','murid_kelas_jurusan'));
             
         //    dd($nilai);
     

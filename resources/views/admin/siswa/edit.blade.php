@@ -93,9 +93,11 @@
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Kelas</label>
                     <select class="form-control" name="kelas_id">
-                      @foreach($kelas as $s)
-                       <option value="{{$s->id}}"  {{ $s->nama_kelas == ['kelas_id'] ? 'selected' : ""}}>{{$s->nama_kelas}}</option>
-                      @endforeach
+                     @foreach($kelas as $key => $row)
+                                <option value="{{ $row->id }}" @foreach($kelasJurusan as $a=>$value)
+                                    {{$row->id==$value->kelas_id?'selected':''}}
+                                    @endforeach >{{ $row->nama_kelas }}</option>
+                                @endforeach
                     </select>
                   </div>
                 </div>
@@ -103,20 +105,18 @@
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Jurusan</label>
                     <select class="form-control" name="jurusan">
-                      @foreach($kelas as $s)
-                         <option value="{{$s->id}}"  {{ $s->nama_jurusan == ['kelas_id'] ? 'selected' : ""}}>{{$s->nama_jurusan}}</option>
-                      @endforeach
+                     @foreach($jurusan as $key => $row)
+                                <option value="{{ $row->id }}" @foreach($kelasJurusan as $a=>$value)
+                                    {{$row->id==$value->jurusan_id?'selected':''}}
+                                    @endforeach >{{ $row->nama_jurusan }}</option>
+                                @endforeach
                     </select>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Tahun Ajaran</label>
-                    <select class="form-control" name="tahun_ajaran">
-                      @foreach($kelas as $s)
-                        <option value="{{$s->id}}"  {{ $s->tahun_ajaran == ['kelas_id'] ? 'selected' : ""}}>{{$s->tahun_ajaran}}</option>
-                      @endforeach
-                    </select>
+                   <input type="text" id="input-username" class="form-control" value="{{$murid->tahun_ajaran}}" name="tahun_ajaran">
                   </div>
                 </div>
                 <div class="col-lg-12">
