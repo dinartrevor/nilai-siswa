@@ -14,6 +14,7 @@
     </h2>
   </div>
   <hr>
+
    <table cellspacing="25">
       <tr>
          <th>Nama Peserta :</th>
