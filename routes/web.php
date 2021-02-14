@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
   Route::get('/admin/nilai/detail/{murid}','Admin\NilaiController@show')->name('nilai_siswa');
   Route::get('/admin/nilai/detail/cetak/{murid}','Admin\NilaiController@cetak_nilai')->name('cetak_nilai_murid');
+  Route::get('/admin/nilai/detail/cetak-ganjil/{murid}','Admin\NilaiController@cetak_nilai_ganjil')->name('cetak_nilai_murid_ganjil');
+  Route::get('/admin/nilai/detail/cetak-genap/{murid}','Admin\NilaiController@cetak_nilai_genap')->name('cetak_nilai_murid_genap');
   Route::post('/admin/nilai/tambah-nilai/{murid}','Admin\NilaiController@store')->name('nilai');
   Route::get('/admin/nilai/delete-nilai/{nilai}/{murid}','Admin\NilaiController@destroy')->name('nilai_delete');
   Route::get('/guru/mapel', 'Admin\NilaiController@guruMapel');
