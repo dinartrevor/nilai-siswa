@@ -41,7 +41,7 @@
         <!-- Light table -->
         <div class="table-responsive">
           <table class="table" id="dataTables">
-            <thead class="thead-light">
+            <thead class="thead-light text">
               <tr>
                 <th >No</th>
                 <th >Nis</th>
@@ -50,6 +50,7 @@
                 <th >Status</th>
                 <th >Semester</th>
                 <th >Guru Mapel</th>
+                 <th style="width: 154.669px;text-align: center;" >Aksi</th>
               </tr>
             </thead>
             <tbody>

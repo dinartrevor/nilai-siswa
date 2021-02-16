@@ -127,13 +127,15 @@ class KelasController extends Controller
         return redirect('admin/kelas')->with('destroy','Data Jurusan berhasil dihapus');
     }
     public function cetak(){
-        $kelas = Kelas::join('kelas_jurusan', 'kelas.id', '=', 'kelas_jurusan.kelas_id')
-        ->join('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
-        ->join('siswa', 'kelas_jurusan.siswa_id', '=', 'siswa.id')
-        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan', DB::raw('count(siswa.id) as jumlah_siswa'))
-        ->groupby('kelas.id','jurusan.id')
-        ->orderby('kelas.nama_kelas', 'asc')
-        ->get();
+    $kelas = Kelas::join('kelas_jurusan', 'kelas.id', '=', 'kelas_jurusan.kelas_id')
+    ->join('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+    ->join('siswa', 'kelas_jurusan.siswa_id', '=', 'siswa.id')
+    ->select('kelas.nama_kelas', 'jurusan.nama_jurusan', DB::raw('count(siswa.id) as jumlah_siswa'),
+        DB::raw("sum(siswa.jenis_kelamin = 'Laki-Laki') as lakilaki"),  
+        DB::raw("sum(siswa.jenis_kelamin = 'Wanita') as wanita"))
+    ->groupby('kelas.id','jurusan.id')
+    ->orderby('kelas.nama_kelas', 'asc')
+    ->get();
 
             $pdf = PDF::loadView('admin.kelas.cetak',compact('kelas'));
             $pdf->setPaper('a4','landscape');

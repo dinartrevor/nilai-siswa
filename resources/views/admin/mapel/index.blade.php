@@ -64,7 +64,7 @@
               @foreach($mapel as $m)
                 <tr>
                   <td>
-                    {{$no++}}
+                    {{$loop->iteration}}
                   </td>
                   <td>
                     {{$m->kode_mapel}}

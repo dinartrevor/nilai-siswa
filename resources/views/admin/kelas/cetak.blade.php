@@ -24,6 +24,8 @@
         <th >Kelas</th>
         <th >Jurusan</th>
         <th>Siswa</th>
+        <th>Laki-Laki</th>
+          <th>Wanita</th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +35,8 @@
           <td> {{$m->nama_kelas}}</td>
           <td> {{$m->nama_jurusan}}</td>
           <td>{{$m->jumlah_siswa}}</td>
+           <td>{{$m->lakilaki}}</td>
+            <td>{{$m->wanita}}</td>
         </tr>
       @endforeach
     </tbody>

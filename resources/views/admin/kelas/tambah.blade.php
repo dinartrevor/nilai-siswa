@@ -77,16 +77,19 @@
                     <label class="form-control-label" for="input-username">Jurusan</label>
                     <select name="nama_jurusan" class="form-control" >
                       <option value="">Pilih Jurusan</option>
-                      <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                      <option value="Teknik Komputer Jaringan">Teknik Komputer Jaringan</option>
+                      <option value="Animasi">Animasi</option>
+                      <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+                      <option value="Logam">Logam</option>
                       <option value="Multimedia">Multimedia</option>
-                      <option value="Teknik Kendaraan Ringan">Teknik Kendaraan Ringan</option>
-                      <option value="Teknik Otomotif">Teknik Otomotif</option>
+                      <option value="Kayu">Kayu</option>
+                       <option value="Keramik">Keramik</option>
+                        <option value="Tekstil">Tekstil</option>
+                        <option value="Teknik Perbaikan Bodi Otomotif">Teknik Perbaikan Bodi Otomotif</option>
                     </select>
                   </div>
                 </div>
               </div>
-                @if($jurusan->count() >= 5)
+                @if($jurusan->count() >= 8)
                     <span>Data Jurusan sudah terisi semua</span>
                 @else
                 <button type="submit" class="btn btn-primary float-right">Tambah</button>

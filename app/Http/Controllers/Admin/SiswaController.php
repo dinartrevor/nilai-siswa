@@ -78,6 +78,7 @@ class SiswaController extends Controller
         KelasJurusan::create(['siswa_id' => $siswa['id'],
             'kelas_id' => $request->kelas_id,
             'jurusan_id' => $request->jurusan]);
+        Mail::to($request->email)->send(new MailNotify());
          DB::commit();
 
         return redirect('/admin/murid')->with('sukses', 'Data Siswa Telah ditambahkan');

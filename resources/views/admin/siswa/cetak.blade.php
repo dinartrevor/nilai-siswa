@@ -22,9 +22,9 @@
       <tr>
       
         <th >NIS</th>
-        <th >Nama</th>
+        <th width="130px">Nama</th>
         <th >Tempat </th>
-        <th> Tanggal Lahir</th>
+        <th width="120px"> Tanggal Lahir</th>
         <th >Kelas </th>
         <th >Jurusan </th>
         <th >Jenis Kelamin</th>
@@ -39,7 +39,8 @@
          
           <td >{{$m->nis}}</td>
           <td >{{$m->nama}}</td>
-          <td >{{$m->tempat_lahir}}</td><td> {{$m->tanggal_lahir}}</td>
+          <td >{{$m->tempat_lahir}}</td>
+          <td>{{Carbon\Carbon::parse($m->tanggal_lahir)->format('d-M-Y')}}</td>
           <td >{{$m->nama_kelas}}</td>
           <td> {{$m->nama_jurusan}}</td>
        
@@ -51,18 +52,6 @@
     </tbody>
   </table>
   
-  <table style="text-align: center;" class="table table-bordered">
-    <thead>
-      <tr>
-        <th >Laki Laki</th>
-        <th >Wanita</th>
-      </tr>
-       <tbody>
-        <tr>
-          <td >{{$siswa_laki}}</td>
-          <td >{{$siswa_wanita}}</td>
-        </tr>
-    </tbody>
-    </thead>
+ 
 </body>
 </html>
