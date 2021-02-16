@@ -135,7 +135,6 @@ class KelasController extends Controller
         ->orderby('kelas.nama_kelas', 'asc')
         ->get();
 
-        // dd($kelas);
             $pdf = PDF::loadView('admin.kelas.cetak',compact('kelas'));
             $pdf->setPaper('a4','landscape');
     
