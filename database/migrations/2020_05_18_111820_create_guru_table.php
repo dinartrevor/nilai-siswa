@@ -23,7 +23,6 @@ class CreateGuruTable extends Migration
             $table->string('jenis_kelamin');
             $table->string('agama');
             $table->text('alamat');
-            $table->string('jabatan');
             $table->string('nomer_hp');
             $table->bigInteger('mapel_id')->nullable();
             $table->timestamps();

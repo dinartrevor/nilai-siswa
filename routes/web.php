@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
   Route::get('/murid', 'Murid\DashboardController@index');
   Route::get('/murid/histori-nilai', 'Murid\NilaiController@index');
+  Route::get('/murid/rangking', 'Murid\NilaiController@rangking')->name('rangkingSiswa');
   Route::get('/murid/cetak-nilai','Murid\NilaiController@export_pdf')->name('cetakNilai');
    Route::get('/murid/cetak-nilai/ganjil','Murid\NilaiController@ganjil')->name('ganjil');
    Route::get('/murid/cetak-nilai/genap','Murid\NilaiController@genap')->name('genap');

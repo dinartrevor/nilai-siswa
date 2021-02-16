@@ -89,13 +89,7 @@
                       <option value="Wanita">Wanita</option>
                     </select>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Jabatan</label>
-                       <input type="text" id="input-username" class="form-control" placeholder="Masukan Jabatan..." name="jabatan" required>
-                  </div>
-                </div>
+                </div> 
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">No Hp</label>

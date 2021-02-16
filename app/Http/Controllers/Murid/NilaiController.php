@@ -153,4 +153,29 @@ class NilaiController extends Controller
 
         return $pdf->stream();
     }
+    public function rangking(){
+        $siswa = Siswa::where('user_id', Auth::id())->first();
+        $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $siswa->id)
+        ->select('kelas.id as kelas_id', 'jurusan.id as jurusan_id')
+        ->first();
+         $siswa = Siswa::leftjoin('nilai', 'siswa.id', '=', 'nilai.siswa_id')
+        ->leftjoin('kelas_jurusan', 'siswa.id','=','kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id','=','kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id','=','jurusan.id')
+        ->select('siswa.id as siswa_id','siswa.nis','siswa.nama','kelas.nama_kelas','jurusan.nama_jurusan','nilai.id as nilai_id',DB::raw('AVG(nilai.nilai_mapel)  as rata_rata_nilai'))
+        ->orderby('rata_rata_nilai','desc')
+        ->where('kelas.id', $murid_kelas_jurusan->kelas_id)
+        ->where('jurusan.id', $murid_kelas_jurusan->jurusan_id)
+        ->groupby('siswa.id')
+        ->get();
+        set_time_limit(300);
+        $pdf = PDF::loadView('murid.rangking',compact('siswa'));
+        $pdf->setPaper('a4','landscape');
+
+        return $pdf->stream();
+     
+    }
 }

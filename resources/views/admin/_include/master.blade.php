@@ -94,6 +94,14 @@
 			});
 		});
   });
+  
+  var limit = 3;
+$('.checkbox_check').on('change', function (e) {
+    if ($('input[type=checkbox]:checked').length > 3) {
+        $(this).prop('checked', false);
+        
+    }
+});
   </script>
 </body>
 

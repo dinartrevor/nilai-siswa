@@ -49,7 +49,6 @@
                 <th >No</th>
                 <th >Nip</th>
                 <th >Nama</th>
-                <th >Jabatan</th>
                 <th >Bidang</th>
                 <th >Tempat & Tanggal Lahir</th>
                 <th >Jenis Kelamin</th>
@@ -58,15 +57,11 @@
               </tr>
             </thead>
             <tbody>
-              @php
-                $no= 1
-              @endphp
               @foreach($guru as $g)
                 <tr>
-                  <td>{{$no++}}</td>
+                  <td>{{$loop->iteration}}</td>
                   <td>{{$g->nip}}</td>
                   <td>{{$g->nama}}</td>
-                  <td>{{$g->jabatan}}</td>
                   <td>
                     {!!
                       !empty($g->mapel) ? $g->mapel->nama_mapel:

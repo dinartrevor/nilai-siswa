@@ -91,12 +91,6 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-username">Jabatan</label>
-                       <input type="text" id="input-username" class="form-control" value="{{$guru->jabatan}}" name="jabatan" required>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
                     <label class="form-control-label" for="input-username">No Hp</label>
                        <input type="text" id="input-username" class="form-control" value="{{$guru->nomer_hp}}" name="nomer_hp" required>
                   </div>

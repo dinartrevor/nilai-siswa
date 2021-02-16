@@ -53,7 +53,6 @@ class GuruController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'agama' => $request->agama,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'jabatan' => $request->jabatan,
             'nomer_hp' => $request->nomer_hp,
             'alamat' => $request->alamat,
             'mapel_id' => $request->mapel_id
@@ -126,4 +125,3 @@ class GuruController extends Controller
         
     }
 }
-

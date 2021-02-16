@@ -38,6 +38,11 @@ class Siswa extends Model
   public function remedial()
   {
       return $this->hasMany(Remedial::class);
+  
+  }
+  public function rangking()
+  {
+      return $this->hasMany(Rangking::class, 'id', 'siswa_id');
   }
 
 

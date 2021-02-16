@@ -15,7 +15,7 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
-            {{-- <a href="{{route('rangking')}}" class="btn  btn-neutral">Rangking</a> --}}
+            <a href="javascript:void(0)" class="btn  btn-neutral" data-toggle="modal" data-target="#rangking">Rangking</a>
             <a href="{{route('tambah_murid')}}" class="btn  btn-neutral">Tambah</a>
             <a href="{{route('cetak_murid')}}" class="btn  btn-neutral" target="_blank">Cetak</a>
           </div>
@@ -89,4 +89,42 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="rangking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rangking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="get" action="{{route('rangking')}}">
+          <div class="form-group">
+            <label class="form-control-label" for="input-username">Kelas</label>
+            <select class="form-control select2" name="kelas" id="mapel" required>
+              <option value="">Pilih Kelas</option>
+              @foreach($kelas as $s)
+                <option value="{{$s->id}}">{{$s->nama_kelas}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="input-username">Jurusan</label>
+            <select class="form-control select2" name="jurusan" required>
+              <option value="">Pilih Jurusan</option>
+               @foreach($jurusan as $j)
+                <option value="{{$j->id}}">{{$j->nama_jurusan}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
 @endsection

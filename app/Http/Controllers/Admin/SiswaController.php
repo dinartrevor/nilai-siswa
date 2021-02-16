@@ -8,6 +8,7 @@ use App\Siswa;
 use App\Kelas;
 use App\User;
 use App\Jurusan;
+use App\Rangking;
 use App\KelasJurusan;
 use App\Mail\MailNotify;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +24,10 @@ class SiswaController extends Controller
     public function index()
     {
         $murid = Siswa::all();
-        return view('admin.siswa.index', compact('murid'));
+        $kelas = Kelas::all();
+        $jurusan = Jurusan::all();
+        // dd($jurusan);
+        return view('admin.siswa.index', compact('murid','kelas','jurusan'));
     }
 
     /**
@@ -78,7 +82,7 @@ class SiswaController extends Controller
         KelasJurusan::create(['siswa_id' => $siswa['id'],
             'kelas_id' => $request->kelas_id,
             'jurusan_id' => $request->jurusan]);
-        Mail::to($request->email)->send(new MailNotify());
+        // Mail::to($request->email)->send(new MailNotify());
          DB::commit();
 
         return redirect('/admin/murid')->with('sukses', 'Data Siswa Telah ditambahkan');
@@ -192,16 +196,22 @@ class SiswaController extends Controller
 
         return $pdf->stream();
     }
-    public function rangking(){
-        $siswa = Siswa::join('nilai', 'siswa.id', '=', 'nilai.siswa_id')
-        ->join('kelas_jurusan', 'siswa.id','=','kelas_jurusan.siswa_id')
-        ->join('kelas', 'kelas_jurusan.kelas_id','=','kelas.id')
-        ->join('jurusan', 'kelas_jurusan.jurusan_id','=','jurusan.id')
-        ->select('siswa.nama','kelas.nama_kelas','jurusan.nama_jurusan',DB::raw('AVG(nilai.nilai_mapel)  as rata_rata_nilai'))
+    public function rangking(Request $request){
+        $siswa = Siswa::leftjoin('nilai', 'siswa.id', '=', 'nilai.siswa_id')
+        ->leftjoin('kelas_jurusan', 'siswa.id','=','kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id','=','kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id','=','jurusan.id')
+        ->select('siswa.id as siswa_id','siswa.nis','siswa.nama','kelas.nama_kelas','jurusan.nama_jurusan','nilai.id as nilai_id',DB::raw('AVG(nilai.nilai_mapel)  as rata_rata_nilai'))
         ->orderby('rata_rata_nilai','desc')
-        ->where('nilai.nilai_mapel', '>=', 70.0)
+        ->where('kelas.id', $request->kelas)
+        ->where('jurusan.id', $request->jurusan)
         ->groupby('siswa.id')
         ->get();
-       dd($siswa);
+        set_time_limit(300);
+        $pdf = PDF::loadView('admin.siswa.rangking',compact('siswa'));
+        $pdf->setPaper('a4','landscape');
+
+        return $pdf->stream();
+     
     }
 }
