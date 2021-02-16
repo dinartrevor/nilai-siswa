@@ -31,35 +31,74 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <form action="{{route('addKelas')}}" method="POST">
-            {{ csrf_field() }}
+      </div>
+    </div>
+  </div>
+ 
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body"> 
+            <div class="pl-lg-4">
+              <form action="{{route('addKelas')}}" method="POST">
+                <div class="row">                
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                        {{ csrf_field() }}
+                        <label class="form-control-label" for="input-username">Kelas</label>
+                        <select name="nama_kelas" class="form-control">
+                          <option value="">Pilih Kelas</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>              
+                    </div>
+                  </div>
+                </div>
+                @if($kelas->count() >= 3)
+                    <span>Data kelas sudah terisi semua</span>
+                @else
+                <button type="submit" class="btn btn-primary float-right">Tambah</button>
+                @endif
+              </form>    
+            </div>
+        </div>
+      </div>
+    </div>
+     <div class="col-md-6">
+      <div class="card">
+        <div class="card-body"> 
+          <form action="{{route('AddJurusan')}}" method="POST">
+                 {{ csrf_field() }}
             <div class="pl-lg-4">
               <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Kelas</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Kelas" name="nama_kelas">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Tahun Ajaran</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Jurusan" name="tahun_ajaran">
-                  </div>
-                </div>
                 <div class="col-lg-12">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Jurusan</label>
-                    <input type="text" id="input-username" class="form-control" placeholder="Jurusan" name="nama_jurusan">
+                    <select name="nama_jurusan" class="form-control" >
+                      <option value="">Pilih Jurusan</option>
+                      <option value="Animasi">Animasi</option>
+                      <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+                      <option value="Logam">Logam</option>
+                      <option value="Multimedia">Multimedia</option>
+                      <option value="Kayu">Kayu</option>
+                       <option value="Keramik">Keramik</option>
+                        <option value="Tekstil">Tekstil</option>
+                        <option value="Teknik Perbaikan Bodi Otomotif">Teknik Perbaikan Bodi Otomotif</option>
+                    </select>
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Tambah</button>
+                @if($jurusan->count() >= 8)
+                    <span>Data Jurusan sudah terisi semua</span>
+                @else
+                <button type="submit" class="btn btn-primary float-right">Tambah</button>
+                @endif
             </div>
-          </form>
+          </form>    
         </div>
       </div>
     </div>
   </div>
+
 @endsection

@@ -26,7 +26,7 @@
     <div class="card mb-3">
       <img src="{{asset('storage/media/remedial/'. $remedial->thumbnail)}}" class="card-img-top" alt="..." height="400px">
       <div class="card-body">
-      <h5 class="card-title">{{$siswa->nama}} - {{$siswa->nis}} - {{$siswa->kelas->nama_kelas}} - {{$siswa->kelas->nama_jurusan}} - {{$siswa->kelas->tahun_ajaran}}</h5>
+      <h5 class="card-title">{{$siswa->nama}} - {{$siswa->nis}} - {{$murid_kelas_jurusan->nama_kelas}} - {{$murid_kelas_jurusan->nama_jurusan}} - {{$siswa->tahun_ajaran}}</h5>
       <p class="card-text">{{$remedial->pesan}}</p>
       <p class="card-text">{{$nilai->mapel->nama_mapel}} - {{$nilai->guru->nama}}</p>
       </div>

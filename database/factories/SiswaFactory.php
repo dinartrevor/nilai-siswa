@@ -16,8 +16,11 @@ $factory->define(Siswa::class, function (Faker $faker) use($kelas) {
         'jenis_kelamin' => $faker->randomElement(['Laki-Laki', 'Perempuan']),   
         'agama' => $faker->randomElement(['Islam', 'Kristen', 'Hindu', 'Budha']) ,   
         'alamat' => $faker->streetAddress,    
+
         'asal_sekolah' => $faker->randomElement(['SMPN 51 Bandung', 'SMPN 48 Bandung', 'SMPN 2 Bojongsoang', 'SMPN 42 Bandung'])  ,  
         'kelas_id' => $faker->randomElement($kelas) ,    
+
+       
        
 
     ];

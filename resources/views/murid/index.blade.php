@@ -111,11 +111,11 @@
               </div>
               <div >
                 <i class="ni education_hat mr-2"></i>
-                {{auth()->user()->siswa->kelas->nama_kelas}} {{auth()->user()->siswa->kelas->nama_jurusan}}
+                {{$murid_kelas_jurusan->nama_kelas}} {{$murid_kelas_jurusan->nama_jurusan}}
               </div>
               <div >
                 <i class="ni education_hat mr-2"></i>
-                {{auth()->user()->siswa->kelas->tahun_ajaran}}
+                {{auth()->user()->siswa->tahun_ajaran}}
               </div>
             </div>
           </div>

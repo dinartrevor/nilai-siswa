@@ -31,12 +31,10 @@ class DashboardController extends Controller
         ->where('nilai.semester', '=', $genap ? $genap->semester : "")
         ->distinct() 
         ->get();
-        // dd($semester1);
         $semester2 = Nilai::leftjoin('siswa', 'nilai.siswa_id', '=', 'siswa.id')
         ->leftjoin('mapel', 'nilai.mapel_id', '=', 'mapel.id')
-          ->where('siswa.user_id', $siswa->user_id)
-
-         ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
+        ->where('siswa.user_id', $siswa->user_id)
+        ->select('nilai.nilai_mapel', 'mapel.nama_mapel')
         ->where('nilai.semester', '=', $ganjil ? $ganjil->semester : "")
         ->distinct() 
         ->get();
@@ -45,9 +43,14 @@ class DashboardController extends Controller
         $nilai_mapel = $semester1->pluck('nilai_mapel');
          $nama_mapel2 = $semester2->pluck('nama_mapel');
         $nilai_mapel2 = $semester2->pluck('nilai_mapel');
+         $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $siswa->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
        
-       
-        return view('murid.index', compact('nilai','lulus','nama_mapel','nilai_mapel','nama_mapel2','nilai_mapel2'));
+        return view('murid.index', compact('nilai','lulus','nama_mapel','nilai_mapel','nama_mapel2','nilai_mapel2','murid_kelas_jurusan'));
     }
 
     /**

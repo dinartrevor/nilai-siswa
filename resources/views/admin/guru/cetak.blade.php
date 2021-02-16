@@ -26,6 +26,7 @@
         <th width="200px">Tempat Tanggal Lahir</th>
         <th >Nomer Handphone</th>
         <th >Jenis Kelamin</th>
+         <th >Agama</th>
         <th >Mapel</th>
       </tr>
     </thead>
@@ -40,6 +41,7 @@
          
           <td >{{$m->nomer_hp}}</td>
           <td >{{$m->jenis_kelamin}}</td>
+           <td >{{$m->agama}}</td>
           <td >{{$m->mapel->nama_mapel}}</td>
         </tr>
       @endforeach

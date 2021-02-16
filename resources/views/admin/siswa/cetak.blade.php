@@ -22,12 +22,13 @@
       <tr>
       
         <th >NIS</th>
-        <th >Nama</th>
+        <th width="130px">Nama</th>
         <th >Tempat </th>
-         <th> Tanggal Lahir</th>
+        <th width="120px"> Tanggal Lahir</th>
         <th >Kelas </th>
         <th >Jurusan </th>
         <th >Jenis Kelamin</th>
+        <th >Tahun Ajaran</th>
         <th >Email</th>
       </tr>
     </thead>
@@ -38,14 +39,19 @@
          
           <td >{{$m->nis}}</td>
           <td >{{$m->nama}}</td>
-          <td >{{$m->tempat_lahir}}</td><td> {{$m->tanggal_lahir}}</td>
-          <td >{{$m->kelas->nama_kelas}}</td>
-          <td> {{$m->kelas->nama_jurusan}}</td>
+          <td >{{$m->tempat_lahir}}</td>
+          <td>{{Carbon\Carbon::parse($m->tanggal_lahir)->format('d-M-Y')}}</td>
+          <td >{{$m->nama_kelas}}</td>
+          <td> {{$m->nama_jurusan}}</td>
+       
           <td >{{$m->jenis_kelamin}}</td>
+          <td >{{$m->tahun_ajaran}}</td>
           <td >{{$m->email}}</td>
         </tr>
       @endforeach
     </tbody>
   </table>
+  
+ 
 </body>
 </html>

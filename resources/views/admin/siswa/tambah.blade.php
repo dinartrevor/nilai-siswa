@@ -106,7 +106,7 @@
                     <label class="form-control-label" for="input-username">Jurusan</label>
                     <select class="form-control" name="jurusan" required>
                       <option>Pilih Jurusan</option>
-                      @foreach($kelas as $s)
+                      @foreach($jurusan as $s)
                         <option value="{{$s->id}}">{{$s->nama_jurusan}}</option>
                       @endforeach
                     </select>
@@ -115,12 +115,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-username">Tahun Ajaran</label>
-                    <select class="form-control" name="tahun_ajaran" required>
-                      <option>Tahun Ajaran</option>
-                      @foreach($kelas as $s)
-                        <option value="{{$s->id}}">{{$s->tahun_ajaran}}</option>
-                      @endforeach
-                    </select>
+                   <input type="text" name="tahun_ajaran" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-lg-12">

@@ -16,6 +16,8 @@
           </div>
           <div class="col-lg-6 col-5 text-right">
 
+            <a href="{{route('ganjil')}}" target="_blank" class="btn  btn-neutral">Ganjil</a>
+            <a href="{{route('genap')}}" target="_blank" class="btn  btn-neutral">Genap</a>
             <a href="{{route('cetakNilai')}}" target="_blank" class="btn  btn-neutral">Cetak</a>
           </div>
         </div>
@@ -39,7 +41,7 @@
         <!-- Light table -->
         <div class="table-responsive">
           <table class="table" id="dataTables">
-            <thead class="thead-light">
+            <thead class="thead-light text">
               <tr>
                 <th >No</th>
                 <th >Nis</th>
@@ -48,6 +50,7 @@
                 <th >Status</th>
                 <th >Semester</th>
                 <th >Guru Mapel</th>
+                 <th style="width: 154.669px;text-align: center;" >Aksi</th>
               </tr>
             </thead>
             <tbody>

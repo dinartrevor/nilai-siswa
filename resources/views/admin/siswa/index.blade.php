@@ -15,6 +15,7 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
+            {{-- <a href="{{route('rangking')}}" class="btn  btn-neutral">Rangking</a> --}}
             <a href="{{route('tambah_murid')}}" class="btn  btn-neutral">Tambah</a>
             <a href="{{route('cetak_murid')}}" class="btn  btn-neutral" target="_blank">Cetak</a>
           </div>
@@ -55,8 +56,7 @@
                 <th >No</th>
                 <th >Nis</th>
                 <th >Nama</th>
-                <th >Email</th>
-                <th >Kelas & Jurusan</th>
+                <th >Email</th>              
                 <th >Jenis Kelamin</th>
                 <th >Asal Sekolah</th>
                 <th >Aksi</th>
@@ -73,8 +73,7 @@
                   </td>
                   <td >{{$m->nis}}</td>
                   <td ><a href="{{route('nilai_siswa', $m->id)}}" title="Nilai">{{$m->nama}}</a></td>
-                  <td >{{$m->email}}</td>
-                  <td >{{$m->kelas->nama_kelas}} {{ $m->kelas->nama_jurusan }} </td>
+                  <td >{{$m->email}}</td>                 
                   <td >{{$m->jenis_kelamin}}</td>
                   <td >{{$m->asal_sekolah}}</td>
                   <td>

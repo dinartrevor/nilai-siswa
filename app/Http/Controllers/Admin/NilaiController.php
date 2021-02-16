@@ -86,7 +86,13 @@ class NilaiController extends Controller
         ->first();
         $nilai = Nilai::where('siswa_id', $murid->id)
         ->get();
-        return view('admin.nilai.detail', compact('murid', 'nilai', 'mapel','guru','nilai_rata'));
+        $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $murid->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
+        return view('admin.nilai.detail', compact('murid', 'nilai', 'mapel','guru','nilai_rata','murid_kelas_jurusan'));
     }
 
     /**
@@ -138,7 +144,55 @@ class NilaiController extends Controller
          $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
         ->where('siswa_id', $siswa->id)
         ->first();
-        $pdf = PDF::loadView('admin.nilai.cetak-nilai',compact('siswa', 'nilai','remed','lulus','nilai_rata'));
+         $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $siswa->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
+        $pdf = PDF::loadView('admin.nilai.cetak-nilai',compact('siswa', 'nilai','remed','lulus','nilai_rata','murid_kelas_jurusan'));
+        $pdf->setPaper('a4','potrait');
+
+        return $pdf->stream();
+           
+    }
+    public function cetak_nilai_ganjil($murid){
+        $siswa = Siswa::where('id', $murid)->first();
+        $nilai = Nilai::where('siswa_id', $siswa->id )->where('semester', 'ganjil')->get();
+        $remed = Nilai::where('status', 'Remed')->where('siswa_id', $siswa->id)->where('semester', 'ganjil')->count();
+        $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa->id)->where('semester', 'ganjil')->count();
+         $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
+        ->where('siswa_id', $siswa->id)
+        ->where('semester', 'ganjil')
+        ->first();
+         $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $siswa->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
+        $pdf = PDF::loadView('admin.nilai.cetak-nilai-ganjil',compact('siswa', 'nilai','remed','lulus','nilai_rata','murid_kelas_jurusan'));
+        $pdf->setPaper('a4','potrait');
+
+        return $pdf->stream();
+           
+    }
+    public function cetak_nilai_genap($murid){
+        $siswa = Siswa::where('id', $murid)->first();
+        $nilai = Nilai::where('siswa_id', $siswa->id )->where('semester', 'genap')->get();
+        $remed = Nilai::where('status', 'Remed')->where('siswa_id', $siswa->id)->where('semester', 'genap')->count();
+        $lulus = Nilai::where('status', 'Lulus')->where('siswa_id', $siswa->id)->where('semester', 'genap')->count();
+         $nilai_rata = Nilai::select(DB::raw('AVG(nilai_mapel)  as rata_rata_nilai'))
+        ->where('siswa_id', $siswa->id)
+        ->where('semester', 'genap')
+        ->first();
+         $murid_kelas_jurusan = Siswa::leftjoin('kelas_jurusan', 'siswa.id', '=', 'kelas_jurusan.siswa_id')
+        ->leftjoin('kelas', 'kelas_jurusan.kelas_id', '=', 'kelas.id')
+        ->leftjoin('jurusan', 'kelas_jurusan.jurusan_id', '=', 'jurusan.id')
+        ->where('siswa.id', $siswa->id)
+        ->select('kelas.nama_kelas', 'jurusan.nama_jurusan')
+        ->first();
+        $pdf = PDF::loadView('admin.nilai.cetak-nilai-genap',compact('siswa', 'nilai','remed','lulus','nilai_rata','murid_kelas_jurusan'));
         $pdf->setPaper('a4','potrait');
 
         return $pdf->stream();

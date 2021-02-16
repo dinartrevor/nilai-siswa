@@ -15,8 +15,12 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
-            <button type="button" class="btn btn-neutral" data-toggle="modal" data-target="#exampleModal">Tambah</button>
             <a href="/admin/murid" class="btn btn-neutral">Kembali</a>
+            <button type="button" class="btn btn-neutral" data-toggle="modal" data-target="#exampleModal">Tambah</button>
+           <br>
+           <br>
+            <a href="{{route('cetak_nilai_murid_ganjil', $murid->id)}}" class="btn btn-neutral">Ganjil</a>
+            <a href="{{route('cetak_nilai_murid_genap', $murid->id)}}" class="btn btn-neutral">Genap</a>
             <a href="{{route('cetak_nilai_murid', $murid->id)}}" class="btn btn-neutral">Laporan</a>
           </div>
         </div>
@@ -50,8 +54,8 @@
             <strong class="card-text">{{$murid->nama}}</strong>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{$murid->kelas->nama_kelas}} {{$murid->kelas->nama_jurusan}} </li>
-            <li class="list-group-item">{{$murid->kelas->tahun_ajaran}}</li>
+            <li class="list-group-item">{{$murid_kelas_jurusan->nama_kelas}} {{$murid_kelas_jurusan->nama_jurusan}} </li>
+            <li class="list-group-item">{{$murid->tahun_ajaran}}</li>
             <li class="list-group-item">{{$murid->jenis_kelamin}}</li>
           </ul>
         </div>
