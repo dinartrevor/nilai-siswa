@@ -20,14 +20,14 @@
   <table style="text-align: center;" class="table table-bordered">
     <thead>
       <tr>
-      
+        <th>No</th>
         <th >NIS</th>
-        <th width="130px">Nama</th>
+        <th width="100px">Nama</th>
         <th >Tempat </th>
-        <th width="120px"> Tanggal Lahir</th>
+        <th width="110px"> Tanggal Lahir</th>
         <th >Kelas </th>
         <th >Jurusan </th>
-        <th >Jenis Kelamin</th>
+        <th width="100px">Jenis Kelamin</th>
         <th >Tahun Ajaran</th>
         <th >Email</th>
       </tr>
@@ -36,7 +36,7 @@
     
       @foreach($siswa as $m)
         <tr>
-         
+          <td>{{$loop->iteration}}</td>
           <td >{{$m->nis}}</td>
           <td >{{$m->nama}}</td>
           <td >{{$m->tempat_lahir}}</td>
@@ -51,7 +51,7 @@
       @endforeach
     </tbody>
   </table>
-  
+  <span>Jumlah Siswa {{$siswa->count()}}</span>
  
 </body>
 </html>

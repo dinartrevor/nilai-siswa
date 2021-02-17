@@ -214,4 +214,14 @@ class SiswaController extends Controller
         return $pdf->stream();
      
     }
+     public function gender(Request $request){
+        $siswa = Siswa::where('jenis_kelamin', $request->jenis_kelamin)
+        ->get();
+        set_time_limit(300);
+        $pdf = PDF::loadView('admin.siswa.gender',compact('siswa'));
+        $pdf->setPaper('a4','landscape');
+
+        return $pdf->stream();
+     
+    }
 }

@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::post('/admin/murid/edit-murid/{murid}/update', 'Admin\SiswaController@update')->name('updateMurid');
   Route::get('/admin/murid/cetak','Admin\SiswaController@cetak')->name('cetak_murid');
    Route::get('/admin/murid/rangking','Admin\SiswaController@rangking')->name('rangking');
+   Route::get('/admin/murid/jenis_kelamin','Admin\SiswaController@gender')->name('gender');
 
   Route::get('/admin/guru','Admin\GuruController@index');
   Route::get('/admin/guru/tambah','Admin\GuruController@create')->name('tambah_guru');

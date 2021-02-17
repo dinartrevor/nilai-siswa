@@ -20,9 +20,9 @@
   <table style="text-align: center;" class="table table-bordered">
     <thead>
       <tr>
-      
+        <th>No</th>
         <th >NIP</th>
-        <th width="125px">Nama</th>
+        <th width="100px">Nama</th>
         <th width="200px">Tempat Tanggal Lahir</th>
         <th >Nomer Handphone</th>
         <th >Jenis Kelamin</th>
@@ -34,7 +34,7 @@
     
       @foreach($guru as $m)
         <tr>
-         
+          <td>{{$loop->iteration}}</td>
           <td >{{$m->nip}}</td>
           <td >{{$m->nama}}</td>
           <td >{{$m->tempat_lahir}}, {{$m->tanggal_lahir}}</td>
@@ -47,5 +47,6 @@
       @endforeach
     </tbody>
   </table>
+  Jumlah Guru {{$guru->count()}}
 </body>
 </html>
