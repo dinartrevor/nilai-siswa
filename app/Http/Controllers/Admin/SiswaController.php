@@ -26,8 +26,9 @@ class SiswaController extends Controller
         $murid = Siswa::all();
         $kelas = Kelas::all();
         $jurusan = Jurusan::all();
-        // dd($jurusan);
-        return view('admin.siswa.index', compact('murid','kelas','jurusan'));
+          $asal_sekolah = Siswa::groupby('asal_sekolah')->get();
+        // dd($asal_sekolah);
+        return view('admin.siswa.index', compact('murid','kelas','jurusan','asal_sekolah'));
     }
 
     /**

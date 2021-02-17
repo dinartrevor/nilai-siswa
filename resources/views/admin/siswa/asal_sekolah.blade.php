@@ -15,8 +15,6 @@
     </h2>
   </div>
   <hr>
-
-
       <table class="table table-bordered text-center" id="dataTables">
         <thead class="thead-light ">
           <tr>

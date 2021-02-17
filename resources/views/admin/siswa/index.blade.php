@@ -172,7 +172,7 @@
               <label class="form-control-label" for="input-username">Asal Sekolah</label>
               <select class="form-control select2" name="asal_sekolah" id="mapel" required>
                 <option value="">Pilih Asal Sekolah</option>
-                 @foreach($murid as $s)
+                 @foreach($asal_sekolah as $s)
                   <option value="{{$s->asal_sekolah}}">{{$s->asal_sekolah}}</option>
                 @endforeach
               </select>
