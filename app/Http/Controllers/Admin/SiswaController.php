@@ -224,4 +224,14 @@ class SiswaController extends Controller
         return $pdf->stream();
      
     }
+      public function asal_sekolah(Request $request){
+        $siswa = Siswa::where('asal_sekolah', $request->asal_sekolah)
+        ->get();
+        set_time_limit(300);
+        $pdf = PDF::loadView('admin.siswa.asal_sekolah',compact('siswa'));
+        $pdf->setPaper('a4','landscape');
+
+        return $pdf->stream();
+     
+    }
 }

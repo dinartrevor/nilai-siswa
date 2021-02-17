@@ -16,8 +16,10 @@
           </div>
           <div class="col-lg-6 col-5 text-right">
             <a href="javascript:void(0)" class="btn  btn-neutral" data-toggle="modal" data-target="#jenis_kelamin">Jenis Kelamin</a>
+            <a href="javascript:void(0)" class="btn  btn-neutral" data-toggle="modal" data-target="#asal_sekolah">Asal Sekolah</a>
             <a href="javascript:void(0)" class="btn  btn-neutral" data-toggle="modal" data-target="#rangking">Rangking</a>
             <a href="{{route('tambah_murid')}}" class="btn  btn-neutral">Tambah</a>
+            <br> <br>
             <a href="{{route('cetak_murid')}}" class="btn  btn-neutral" target="_blank">Cetak</a>
           </div>
         </div>
@@ -128,31 +130,59 @@
       </div>
     </div>
   </div>
-     <div class="modal fade" id="jenis_kelamin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="jenis_kelamin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Jenis Kelamin</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form method="get" action="{{route('gender')}}">
-              <div class="form-group">
-                <label class="form-control-label" for="input-username">Jenis Kelamin</label>
-                <select class="form-control select2" name="jenis_kelamin" id="mapel" required>
-                  <option value="">Pilih Jenis Kelamin</option>
-                  <option value="Laki-Laki">Laki-Laki</option>
-                  <option value="Wanita">Wanita</option>
-                </select>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Send message</button>
-              </div>
-            </form>
-          </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Jenis Kelamin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="get" action="{{route('gender')}}">
+            <div class="form-group">
+              <label class="form-control-label" for="input-username">Jenis Kelamin</label>
+              <select class="form-control select2" name="jenis_kelamin" id="mapel" required>
+                <option value="">Pilih Jenis Kelamin</option>
+                <option value="Laki-Laki">Laki-Laki</option>
+                <option value="Wanita">Wanita</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Send message</button>
+            </div>
+          </form>
         </div>
       </div>
-     </div>
+    </div>
+  </div>
+  <div class="modal fade" id="asal_sekolah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Asal Sekolah</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="get" action="{{route('asal_sekolah')}}">
+            <div class="form-group">
+              <label class="form-control-label" for="input-username">Asal Sekolah</label>
+              <select class="form-control select2" name="asal_sekolah" id="mapel" required>
+                <option value="">Pilih Asal Sekolah</option>
+                 @foreach($murid as $s)
+                  <option value="{{$s->asal_sekolah}}">{{$s->asal_sekolah}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

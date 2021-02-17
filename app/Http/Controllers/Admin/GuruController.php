@@ -17,8 +17,8 @@ class GuruController extends Controller
     public function index()
     {
         $guru = Guru::all();
-
-        return view('admin.guru.index',compact('guru'));
+        $mapel = Mapel::all();
+        return view('admin.guru.index',compact('guru','mapel'));
     }
 
     /**
@@ -123,5 +123,15 @@ class GuruController extends Controller
     
             return $pdf->stream();
         
+    }
+    public function mapel(Request $request){
+        $guru = Mapel::leftjoin('guru', 'mapel.id', '=', 'guru.mapel_id')       
+        ->where('mapel.id', $request->mapel)
+        ->select('guru.nama', 'mapel.nama_mapel')
+        ->get();
+        $pdf = PDF::loadView('admin.guru.mapel',compact('guru'));
+        $pdf->setPaper('a4','landscape');
+    
+            return $pdf->stream();
     }
 }

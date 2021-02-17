@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mapel;
+use App\Guru;
 use PDF;
 class MapelController extends Controller
 {
@@ -16,7 +17,8 @@ class MapelController extends Controller
     public function index()
     {
         $mapel = Mapel::all();
-        return view('admin.mapel.index',compact('mapel'));
+         $guru = Guru::all();
+        return view('admin.mapel.index',compact('mapel','guru'));
     }
 
     /**
@@ -26,6 +28,7 @@ class MapelController extends Controller
      */
     public function create()
     {
+       
         return view('admin.mapel.tambah');
     }
 
@@ -103,6 +106,16 @@ class MapelController extends Controller
         // dd($mapel);
             $pdf = PDF::loadView('admin.mapel.cetak',compact('mapel'));
             $pdf->setPaper('a4','landscape');
+    
+            return $pdf->stream();
+    }
+    public function guru(Request $request){
+        $guru = Guru::leftjoin('mapel', 'guru.mapel_id', '=', 'mapel.id')       
+        ->where('mapel.id', $request->guru)
+        ->select('guru.nama', 'mapel.nama_mapel')
+        ->get();
+        $pdf = PDF::loadView('admin.mapel.guru',compact('guru'));
+        $pdf->setPaper('a4','landscape');
     
             return $pdf->stream();
     }

@@ -15,6 +15,7 @@
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
+            <a href="javascript:void(0)" class="btn btn-neutral" data-toggle="modal" data-target="#guru">Guru</a>
             <a href="{{route('tambah_mapel')}}" class="btn  btn-neutral">Tambah</a>
             <a href="{{route('report_mapel')}}" class="btn  btn-neutral" target="_blank">Cetak</a>
         </div>
@@ -80,6 +81,35 @@
               @endforeach
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="guru" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Guru</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="get" action="{{route('guru')}}">
+            <div class="form-group">
+              <label class="form-control-label" for="input-username">Guru</label>
+               <select class="form-control select2" name="guru" required>
+                <option value="">Pilih Guru</option>
+                @foreach($guru as $s)
+                  <option value="{{$s->mapel_id}}">{{$s->nama}}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Send message</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

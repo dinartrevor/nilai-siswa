@@ -100,7 +100,7 @@
                     <label class="form-control-label" for="input-username">Mata Pelajaran</label>
                     <select class="form-control" name="mapel_id" required>
                       @foreach($mapel as $m)
-                        <option value="{{$m->id}}"   {{ $m->nama_mapel == ['mapel_id'] ? 'selected' : ""}}>{{$m->nama_mapel}}</option>
+                        <option value="{{$m->id}}"   {{ $m->id == $guru->mapel_id ? 'selected' : ""}}>{{$m->nama_mapel}}</option>
                       @endforeach
                     </select>
                   </div>

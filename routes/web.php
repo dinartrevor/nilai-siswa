@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/murid/cetak','Admin\SiswaController@cetak')->name('cetak_murid');
    Route::get('/admin/murid/rangking','Admin\SiswaController@rangking')->name('rangking');
    Route::get('/admin/murid/jenis_kelamin','Admin\SiswaController@gender')->name('gender');
+   Route::get('/admin/murid/asal_sekolah','Admin\SiswaController@asal_sekolah')->name('asal_sekolah');
 
   Route::get('/admin/guru','Admin\GuruController@index');
   Route::get('/admin/guru/tambah','Admin\GuruController@create')->name('tambah_guru');
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::get('/admin/guru/edit/{guru}','Admin\GuruController@edit')->name('edit_guru');
   Route::post('/admin/guru/edit/{guru}/update','Admin\GuruController@update')->name('updateGuru');
   Route::get('/admin/guru/cetak','Admin\GuruController@cetak')->name('cetak_guru');
-
+Route::get('/admin/mapel/cetak-mapel','Admin\GuruController@mapel')->name('mapel');
   Route::get('/admin/kelas','Admin\KelasController@index');
   Route::get('/admin/kelas/tambah','Admin\KelasController@create')->name('tambah_kelas');
   Route::post('/admin/kelas/tambah/add','Admin\KelasController@store')->name('addKelas');
@@ -56,6 +57,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
   Route::post('/admin/mapel/edit-mapel/{mapel}/update', 'Admin\MapelController@update')->name('updateMapel');
   Route::get('/admin/mapel/delete-mapel/{mapel}', 'Admin\MapelController@destroy');
   Route::get('/admin/mapel/cetak','Admin\MapelController@cetak')->name('report_mapel');
+  Route::get('/admin/mapel/cetak-guru','Admin\MapelController@guru')->name('guru');
+  
 
   Route::get('/admin/nilai/detail/{murid}','Admin\NilaiController@show')->name('nilai_siswa');
   Route::get('/admin/nilai/detail/cetak/{murid}','Admin\NilaiController@cetak_nilai')->name('cetak_nilai_murid');
